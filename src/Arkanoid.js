@@ -6,20 +6,22 @@ define(function (require) {
     var Controller = require('./controller/KeyboardController');
     var View = require('./View/DOMView');
 
-    var gameItems = [new Platform(100, 560, 180, 20)];
+    var gameItems = [new Platform(180, 20)];
 
     // Populate game field with bricks
-    var brickX = 5;
-    var brickY = 5;
+    var brickX = 0;
+    var brickY = 0;
 
     for(var i = 0; i < 50; i++) {
         gameItems.push(new Brick(brickX, brickY));
+
         if(brickX + Brick.WIDTH >= Item.COLLISION_BOX_X - Brick.WIDTH) {
-            brickX = 5;
+            brickX = 0;
             brickY = brickY + Brick.HEIGHT + 3;
         } else {
             brickX = brickX + Brick.WIDTH + 3;
         }
+
     }
 
     var Keyboard = new Controller(gameItems[0]);

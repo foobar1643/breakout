@@ -1,6 +1,10 @@
-define(['./Item'], function(Item) {
-    var Platform = function(x, y, width, height) {
-        Item.call(this, x, y, width, height, 'rgb(255, 255, 255)', 15);
+define(['./Item', './DOMGameField'], function(Item, GameField) {
+    var field = new GameField();
+
+    var Platform = function(width, height) {
+        var platformY = (field.height - (field.height - (field.height - height))) - height;
+        var platformX = (field.width / 2) - (width / 2);
+        Item.call(this, platformX, platformY, width, height, 'rgb(255, 255, 255)', 15);
     }
 
     Platform.prototype = Object.create(Item.prototype);
