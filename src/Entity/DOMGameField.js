@@ -4,6 +4,7 @@ define(function() {
         this.height = 600;
 
         this.canvas = document.createElement('canvas');
+        this.canvas.id = 'arkanoid';
         this.canvas.width = this.width;
         this.canvas.height = this.height;
     }

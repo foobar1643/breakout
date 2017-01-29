@@ -16,7 +16,7 @@ define(function (require) {
         gameItems.push(new Brick(brickX, brickY));
         if(brickX + Brick.WIDTH >= Item.COLLISION_BOX_X - Brick.WIDTH) {
             brickX = 5;
-            brickY = brickY + 20 + 3;
+            brickY = brickY + Brick.HEIGHT + 3;
         } else {
             brickX = brickX + Brick.WIDTH + 3;
         }

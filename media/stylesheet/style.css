@@ -12,7 +12,7 @@ html, body {
     text-align: center;
 }
 
-.container > #arkanoid {
+.container > #game-container {
     display: table-cell;
     vertical-align: middle;
 }

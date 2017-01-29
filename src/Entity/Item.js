@@ -18,7 +18,7 @@ define(['./DOMGameField'], function(gameField) {
 
     Item.prototype.render = function(context) {
         context.fillStyle = this.color;
-        context.strokeStyle = 'rgb(0, 0, 0)';
+        context.strokeStyle = '#000000';
         context.strokeRect(this.x, this.y, this.width, this.height);
         context.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -35,13 +35,13 @@ define(['./DOMGameField'], function(gameField) {
     }
 
     Item.prototype.calculateLeftCollisionLength = function() {
-        var nextX = this.x - this.speed;
-        return (nextX < 0) ? 0 : nextX;
+        var nextPos = this.x - this.speed;
+        return (nextPos < 0) ? 0 : nextPos;
     }
 
     Item.prototype.calculateRightCollisionLength = function() {
-        var nextX = this.x + this.speed;
-        return (nextX >= Item.COLLISION_BOX_X - this.width) ? Item.COLLISION_BOX_X - this.width : nextX;
+        var nextPos = this.x + this.speed;
+        return (nextPos >= Item.COLLISION_BOX_X - this.width) ? Item.COLLISION_BOX_X - this.width : nextPos;
     }
 
     return Item;

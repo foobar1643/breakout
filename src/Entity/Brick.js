@@ -1,6 +1,6 @@
 define(['./Item'], function(Item) {
     var Brick = function(x, y) {
-        Item.call(this, x, y, Brick.WIDTH, Brick.HEIGHT, 'rgb(0, 255, 0)', 0);
+        Item.call(this, x, y, Brick.WIDTH, Brick.HEIGHT, 'rgb(215, 25, 20)', 0);
     }
 
     Brick.prototype = Object.create(Item.prototype);
