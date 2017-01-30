@@ -26,21 +26,6 @@ define(['./DOMGameField'], function(GameField) {
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 
-
-        /**
-         *
-             switch(direction) {
-                 case Item.DIRECTION_UP:
-                     return this.y = this.y - this.verticalSpeed;
-                 case Item.DIRECTION_DOWN:
-                     return this.y = this.y + this.verticalSpeed;
-                 case Item.DIRECTION_LEFT:
-                     return this.x = this.x - this.horizontalSpeed;
-                 case Item.DIRECTION_RIGHT:
-                     return this.x = this.x + this.horizontalSpeed;
-             }
-         */
-
     Item.prototype.move = function(direction) {
         var mathOperation = this.movingMathOperation(direction);
         switch(direction) {
@@ -65,26 +50,6 @@ define(['./DOMGameField'], function(GameField) {
                 return function(axis, speed) { return axis + speed };
         }
     }
-
-    /*Item.prototype.move = function(direction) {
-        switch(direction) {
-            case Item.DIRECTION_LEFT:
-                return this.x = this.calculateLeftCollisionLength();
-            case Item.DIRECTION_RIGHT:
-                return this.x = this.calculateRightCollisionLength();
-        }
-        return false;
-    }
-
-    Item.prototype.calculateLeftCollisionLength = function() {
-        var nextPos = this.x - this.speed;
-        return (nextPos < 0) ? 2 : nextPos;
-    }
-
-    Item.prototype.calculateRightCollisionLength = function() {
-        var nextPos = this.x + this.speed;
-        return (nextPos >= GameField.WIDTH - this.width) ? GameField.WIDTH - (this.width + 2) : nextPos;
-    }*/
 
     return Item;
 });
