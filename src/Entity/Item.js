@@ -26,18 +26,44 @@ define(['./DOMGameField'], function(GameField) {
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 
+
+        /**
+         *
+             switch(direction) {
+                 case Item.DIRECTION_UP:
+                     return this.y = this.y - this.verticalSpeed;
+                 case Item.DIRECTION_DOWN:
+                     return this.y = this.y + this.verticalSpeed;
+                 case Item.DIRECTION_LEFT:
+                     return this.x = this.x - this.horizontalSpeed;
+                 case Item.DIRECTION_RIGHT:
+                     return this.x = this.x + this.horizontalSpeed;
+             }
+         */
+
     Item.prototype.move = function(direction) {
+        var mathOperation = this.movingMathOperation(direction);
         switch(direction) {
             case Item.DIRECTION_UP:
-                return this.y = this.y - this.verticalSpeed;
+                return this.y = mathOperation(this.y, this.verticalSpeed);
             case Item.DIRECTION_DOWN:
-                return this.y = this.y + this.verticalSpeed;
+                return this.y = mathOperation(this.y, this.verticalSpeed);
             case Item.DIRECTION_LEFT:
-                return this.x = this.x - this.horizontalSpeed;
+                return this.x = mathOperation(this.x, this.horizontalSpeed);
             case Item.DIRECTION_RIGHT:
-                return this.x = this.x + this.horizontalSpeed;
+                return this.x = mathOperation(this.x, this.horizontalSpeed);
         }
-        return false;
+    }
+
+    Item.prototype.movingMathOperation = function(direction) {
+        switch(direction) {
+            case Item.DIRECTION_UP:
+            case Item.DIRECTION_LEFT:
+                return function(axis, speed) { return axis - speed };
+            case Item.DIRECTION_DOWN:
+            case Item.DIRECTION_RIGHT:
+                return function(axis, speed) { return axis + speed };
+        }
     }
 
     /*Item.prototype.move = function(direction) {

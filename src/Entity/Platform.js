@@ -1,14 +1,19 @@
-define(['./Item', './DOMGameField', './Ball'], function(Item, GameField, Ball) {
+define(['./Item', './DOMGameField', './Ball', '../Collision/PlatformCollisionDetection'], function(Item, GameField, Ball, CollisionDetector) {
     var Platform = function(width, height) {
         var platformY = (GameField.HEIGHT - (GameField.HEIGHT - (GameField.HEIGHT - height))) - height; // Find a better way to do this
         var platformX = (GameField.WIDTH / 2) - (width / 2);
-        var ballSticker = null;
         Item.call(this, platformX, platformY, width, height, 'rgb(255, 255, 255)', 15, 0);
+        this.ballSticker = null;
+        this.detector = new CollisionDetector(this);
     }
 
     Platform.prototype = Object.create(Item.prototype);
 
     Platform.prototype.move = function(direction) {
+        if(this.detector.collision(direction)) {
+            return;
+        }
+
         var previousPos = this.x;
         var nextPos = Item.prototype.move.call(this, direction);
 
