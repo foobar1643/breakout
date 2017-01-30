@@ -3,10 +3,14 @@ define(function (require) {
     var GameField = require('./entity/DOMGameField');
     var Platform = require('./entity/Platform');
     var Brick = require('./entity/Brick');
+    var Ball = require('./entity/Ball');
     var Controller = require('./controller/KeyboardController');
     var View = require('./View/DOMView');
 
-    var gameItems = [new Platform(180, 20)];
+    var gamePlatform = new Platform(180, 20);
+    var gameBall = new Ball();
+    gameBall.stickToPlatform(gamePlatform);
+    var gameItems = [gamePlatform, gameBall];
 
     // Populate game field with bricks
     var brickX = 0;

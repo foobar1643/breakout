@@ -13,6 +13,9 @@ define(['../Entity/Item'], function(Item) {
             case 'KeyA':
                 this.platform.move(Item.ITEM_MOVE_LEFT);
                 break;
+            case 'Space':
+                this.platform.unstickBall();
+                break;
         }
     }
 

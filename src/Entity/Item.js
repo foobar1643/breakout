@@ -26,22 +26,21 @@ define(['./DOMGameField'], function(gameField) {
     Item.prototype.move = function(direction) {
         switch(direction) {
             case Item.ITEM_MOVE_LEFT:
-                this.x = this.calculateLeftCollisionLength();
-                break;
+                return this.x = this.calculateLeftCollisionLength();
             case Item.ITEM_MOVE_RIGHT:
-                this.x = this.calculateRightCollisionLength();
-                break;
+                return this.x = this.calculateRightCollisionLength();
         }
+        return false;
     }
 
     Item.prototype.calculateLeftCollisionLength = function() {
         var nextPos = this.x - this.speed;
-        return (nextPos < 0) ? 0 : nextPos;
+        return (nextPos < 0) ? 2 : nextPos;
     }
 
     Item.prototype.calculateRightCollisionLength = function() {
         var nextPos = this.x + this.speed;
-        return (nextPos >= Item.COLLISION_BOX_X - this.width) ? Item.COLLISION_BOX_X - this.width : nextPos;
+        return (nextPos >= Item.COLLISION_BOX_X - this.width) ? Item.COLLISION_BOX_X - (this.width + 2) : nextPos;
     }
 
     return Item;
