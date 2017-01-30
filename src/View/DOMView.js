@@ -27,6 +27,10 @@ define(function() {
         }
     }
 
+    View.prototype.resetGameItems = function(gameItems) {
+        this.gameItems = gameItems;
+    }
+
     View.prototype.gameLoop = function(timestamp) {
         // Prepare the scene for rendering a game.
         this.prepareScene();
