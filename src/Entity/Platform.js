@@ -3,7 +3,7 @@ define(['./Item', './DOMGameField', './Ball'], function(Item, GameField, Ball) {
         var platformY = (GameField.HEIGHT - (GameField.HEIGHT - (GameField.HEIGHT - height))) - height; // Find a better way to do this
         var platformX = (GameField.WIDTH / 2) - (width / 2);
         var ballSticker = null;
-        Item.call(this, platformX, platformY, width, height, 'rgb(255, 255, 255)', 15);
+        Item.call(this, platformX, platformY, width, height, 'rgb(255, 255, 255)', 15, 0);
     }
 
     Platform.prototype = Object.create(Item.prototype);
@@ -13,7 +13,7 @@ define(['./Item', './DOMGameField', './Ball'], function(Item, GameField, Ball) {
         var nextPos = Item.prototype.move.call(this, direction);
 
         if(this.hasStickedBall() && previousPos != nextPos) {
-            this.ballSticker.moveSticked(this.speed, direction);
+            this.ballSticker.move(direction);
         }
     }
 

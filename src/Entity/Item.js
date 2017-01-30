@@ -1,12 +1,13 @@
 define(['./DOMGameField'], function(GameField) {
 
-    var Item = function(x, y, width, height, color, speed) {
+    var Item = function(x, y, width, height, color, hSpeed, vSpeed) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.speed = speed;
+        this.horizontalSpeed = hSpeed;
+        this.verticalSpeed = vSpeed;
     }
 
     // Direction constants for moving code
@@ -27,6 +28,20 @@ define(['./DOMGameField'], function(GameField) {
 
     Item.prototype.move = function(direction) {
         switch(direction) {
+            case Item.DIRECTION_UP:
+                return this.y = this.y - this.verticalSpeed;
+            case Item.DIRECTION_DOWN:
+                return this.y = this.y + this.verticalSpeed;
+            case Item.DIRECTION_LEFT:
+                return this.x = this.x - this.horizontalSpeed;
+            case Item.DIRECTION_RIGHT:
+                return this.x = this.x + this.horizontalSpeed;
+        }
+        return false;
+    }
+
+    /*Item.prototype.move = function(direction) {
+        switch(direction) {
             case Item.DIRECTION_LEFT:
                 return this.x = this.calculateLeftCollisionLength();
             case Item.DIRECTION_RIGHT:
@@ -43,7 +58,7 @@ define(['./DOMGameField'], function(GameField) {
     Item.prototype.calculateRightCollisionLength = function() {
         var nextPos = this.x + this.speed;
         return (nextPos >= GameField.WIDTH - this.width) ? GameField.WIDTH - (this.width + 2) : nextPos;
-    }
+    }*/
 
     return Item;
 });
