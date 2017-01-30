@@ -1,13 +1,13 @@
 define(function() {
     var DOMGameField = function() {
-        this.width = 800;
-        this.height = 600;
-
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'arkanoid';
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
+        this.canvas.width = DOMGameField.WIDTH; // Game field width in pixels
+        this.canvas.height = DOMGameField.HEIGHT; // Game field height in pixels
     }
+
+    DOMGameField.WIDTH = 800;
+    DOMGameField.HEIGHT = 600;
 
     return DOMGameField;
 });

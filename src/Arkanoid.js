@@ -19,7 +19,7 @@ define(function (require) {
     for(var i = 0; i < 50; i++) {
         gameItems.push(new Brick(brickX, brickY));
 
-        if(brickX + Brick.WIDTH >= Item.COLLISION_BOX_X - Brick.WIDTH) {
+        if(brickX + Brick.WIDTH >= GameField.WIDTH - Brick.WIDTH) {
             brickX = 0;
             brickY = brickY + Brick.HEIGHT + 3;
         } else {

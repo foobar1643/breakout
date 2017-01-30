@@ -1,5 +1,4 @@
-define(['./DOMGameField'], function(gameField) {
-    var domField = new gameField();
+define(['./DOMGameField'], function(GameField) {
 
     var Item = function(x, y, width, height, color, speed) {
         this.x = x;
@@ -10,24 +9,27 @@ define(['./DOMGameField'], function(gameField) {
         this.speed = speed;
     }
 
-    Item.ITEM_MOVE_LEFT = 'left';
-    Item.ITEM_MOVE_RIGHT = 'right';
-
-    Item.COLLISION_BOX_Y = domField.height;
-    Item.COLLISION_BOX_X = domField.width;
+    // Direction constants for moving code
+    Item.DIRECTION_NONE = 'none';
+    Item.DIRECTION_UP = 'up';
+    Item.DIRECTION_DOWN = 'down';
+    Item.DIRECTION_LEFT = 'left';
+    Item.DIRECTION_RIGHT = 'right';
 
     Item.prototype.render = function(context) {
-        context.fillStyle = this.color;
         context.strokeStyle = '#000000';
+        context.lineWidth = 2;
         context.strokeRect(this.x, this.y, this.width, this.height);
+
+        context.fillStyle = this.color;
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 
     Item.prototype.move = function(direction) {
         switch(direction) {
-            case Item.ITEM_MOVE_LEFT:
+            case Item.DIRECTION_LEFT:
                 return this.x = this.calculateLeftCollisionLength();
-            case Item.ITEM_MOVE_RIGHT:
+            case Item.DIRECTION_RIGHT:
                 return this.x = this.calculateRightCollisionLength();
         }
         return false;
@@ -40,7 +42,7 @@ define(['./DOMGameField'], function(gameField) {
 
     Item.prototype.calculateRightCollisionLength = function() {
         var nextPos = this.x + this.speed;
-        return (nextPos >= Item.COLLISION_BOX_X - this.width) ? Item.COLLISION_BOX_X - (this.width + 2) : nextPos;
+        return (nextPos >= GameField.WIDTH - this.width) ? GameField.WIDTH - (this.width + 2) : nextPos;
     }
 
     return Item;

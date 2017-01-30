@@ -1,21 +1,19 @@
 define(['./Item', './DOMGameField', './Ball'], function(Item, GameField, Ball) {
-    var field = new GameField();
-
     var Platform = function(width, height) {
-        var platformY = (field.height - (field.height - (field.height - height))) - height;
-        var platformX = (field.width / 2) - (width / 2);
+        var platformY = (GameField.HEIGHT - (GameField.HEIGHT - (GameField.HEIGHT - height))) - height; // Find a better way to do this
+        var platformX = (GameField.WIDTH / 2) - (width / 2);
         var ballSticker = null;
         Item.call(this, platformX, platformY, width, height, 'rgb(255, 255, 255)', 15);
     }
 
     Platform.prototype = Object.create(Item.prototype);
-    Platform.prototype.oldMove = Platform.prototype.move; // TODO: Rename an old function into something appropriate
 
-    Platform.prototype.move = function(direction) { // TODO: Refactor this code
+    Platform.prototype.move = function(direction) {
         var previousPos = this.x;
-        var isMoved = (this.oldMove(direction) != previousPos);
-        if(this.ballSticker != null) {
-            this.ballSticker.moveSticked(this.speed, direction, isMoved);
+        var nextPos = Item.prototype.move.call(this, direction);
+
+        if(this.hasStickedBall() && previousPos != nextPos) {
+            this.ballSticker.moveSticked(this.speed, direction);
         }
     }
 
@@ -24,10 +22,14 @@ define(['./Item', './DOMGameField', './Ball'], function(Item, GameField, Ball) {
     }
 
     Platform.prototype.unstickBall = function() {
-        if(this.ballSticker != null) { // TODO: Separate function for checking sticked ball state
-            this.ballSticker.setFreeState(); // TODO: Encapsulate this value
+        if(this.hasStickedBall()) {
+            this.ballSticker.setFreeState();
             this.ballSticker = null;
         }
+    }
+
+    Platform.prototype.hasStickedBall = function() {
+        return (this.ballSticker != null);
     }
 
     return Platform;

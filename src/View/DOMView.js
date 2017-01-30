@@ -18,8 +18,7 @@ define(function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.context.fillStyle = 'rgb(255, 255, 255)';
-        this.context.rect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.fill();
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     View.prototype.renderGame = function() {

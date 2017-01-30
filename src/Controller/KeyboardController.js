@@ -8,10 +8,10 @@ define(['../Entity/Item'], function(Item) {
     KeyboardController.prototype.keyDownEvent = function(event) {
         switch(event.code) {
             case 'KeyD':
-                this.platform.move(Item.ITEM_MOVE_RIGHT);
+                this.platform.move(Item.DIRECTION_RIGHT);
                 break;
             case 'KeyA':
-                this.platform.move(Item.ITEM_MOVE_LEFT);
+                this.platform.move(Item.DIRECTION_LEFT);
                 break;
             case 'Space':
                 this.platform.unstickBall();
