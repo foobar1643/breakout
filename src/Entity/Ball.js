@@ -1,7 +1,8 @@
-define(['./Item', './DOMGameField'], function(Item, GameField) {
+define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], function(Item, GameField, CollisionDetection) {
     var Ball = function() {
         Item.call(this, 0, 0, 0, 0, 'green', Ball.H_SPEED, Ball.V_SPEED);
 
+        this.detector = new CollisionDetection(this);
         this.radius = 7;
 
         this.state = Ball.STATE_PAUSED;
@@ -9,8 +10,8 @@ define(['./Item', './DOMGameField'], function(Item, GameField) {
         this.directionVertical = Item.DIRECTION_NONE;
     }
 
-    Ball.H_SPEED = 1;
-    Ball.V_SPEED = 2;
+    Ball.H_SPEED = 1.5;
+    Ball.V_SPEED = 3;
 
     Ball.STATE_PAUSED = 'paused';
     Ball.STATE_STICKED = 'sticked';
@@ -47,8 +48,30 @@ define(['./Item', './DOMGameField'], function(Item, GameField) {
     }
 
     Ball.prototype.freeStateMove = function() {
+        if(this.detector.collision(this.directionHorizontal, this.directionVertical)) {
+            var collisionType = this.detector.collisionType(this.directionHorizontal, this.directionVertical);
+            switch(collisionType) {
+                case 'horizontal':
+                    this.flipHorizontalDirection();
+                    break;
+                case 'vertical':
+                    this.flipVerticalDirection();
+                    break;
+            }
+        }
+
         this.move(this.directionHorizontal);
         this.move(this.directionVertical);
+    }
+
+    Ball.prototype.flipHorizontalDirection = function() {
+        this.directionHorizontal = (this.directionHorizontal == Item.DIRECTION_LEFT) ?
+            Item.DIRECTION_RIGHT : Item.DIRECTION_LEFT;
+    }
+
+    Ball.prototype.flipVerticalDirection = function() {
+        this.directionVertical = (this.directionVertical == Item.DIRECTION_UP) ?
+            Item.DIRECTION_DOWN : Item.DIRECTION_UP;
     }
 
     Ball.prototype.stickToPlatform = function(platform) {
