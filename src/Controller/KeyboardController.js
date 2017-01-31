@@ -8,6 +8,9 @@ define(['../Entity/Item', '../Bootstrap'], function(Item, Bootstrap) {
 
     KeyboardController.prototype.keyDownEvent = function(event) {
         switch(event.code) {
+            case 'KeyP':
+                this.View.togglePause();
+                break;
             case 'KeyR':
                 var gameItems = Bootstrap();
                 this.platform = gameItems[0];

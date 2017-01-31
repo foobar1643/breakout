@@ -10,9 +10,14 @@ define(function() {
         this.gameItems = gameItems;
         this.lastFrameTime = 0;
 
+        this.gameState = View.GAME_GOING;
+
         // Start a game loop
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
+
+    View.GAME_GOING = 'going';
+    View.GAME_PAUSED = 'paused'
 
     View.DRAW_HASHMAP = true;
     View.HASHMAP_STYLE = 'blue';
@@ -24,6 +29,10 @@ define(function() {
         this.context.moveTo(fromX, fromY);
         this.context.lineTo(toX, toY);
         this.context.stroke();
+    }
+
+    View.prototype.togglePause = function() {
+        this.gameState = (this.gameState == View.GAME_GOING) ? View.GAME_PAUSED : View.GAME_GOING;
     }
 
     View.prototype.drawHashMap = function() {
@@ -64,14 +73,16 @@ define(function() {
     }
 
     View.prototype.gameLoop = function(timestamp) {
-        // Clear every bucket in hashmap
-        this.hashMap.clearBuckets();
-        // Add game items to the buckets
-        this.hashMap.addGameItems(this.gameItems);
-        // Prepare the scene for rendering a game.
-        this.prepareScene();
-        // Render an array of game items to the user.
-        this.renderGame();
+        if(this.gameState == View.GAME_GOING) {
+            // Clear every bucket in hashmap
+            this.hashMap.clearBuckets();
+            // Add game items to the buckets
+            this.hashMap.addGameItems(this.gameItems);
+            // Prepare the scene for rendering a game.
+            this.prepareScene();
+            // Render an array of game items to the user.
+            this.renderGame();
+        }
 
         // Iterate the game loop
         if(timestamp < this.lastFrameMs + (1000 / View.MAX_FPS)) {
