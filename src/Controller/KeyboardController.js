@@ -8,6 +8,9 @@ define(['../Entity/Item', '../Bootstrap'], function(Item, Bootstrap) {
 
     KeyboardController.prototype.keyDownEvent = function(event) {
         switch(event.code) {
+            case 'KeyQ':
+                this.View.requestAnimationFrameX();
+                break;
             case 'KeyP':
                 this.View.togglePause();
                 break;
@@ -21,6 +24,12 @@ define(['../Entity/Item', '../Bootstrap'], function(Item, Bootstrap) {
                 break;
             case 'KeyA':
                 this.platform.move(Item.DIRECTION_LEFT);
+                break;
+            case 'KeyW':
+                this.platform.move(Item.DIRECTION_UP);
+                break;
+            case 'KeyS':
+                this.platform.move(Item.DIRECTION_DOWN);
                 break;
             case 'Space':
                 this.platform.unstickBall();

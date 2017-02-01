@@ -41,6 +41,7 @@ define(['./DOMGameField'], function(GameField) {
     }
 
     Item.prototype.movingMathOperation = function(direction) {
+        //console.log(direction);
         switch(direction) {
             case Item.DIRECTION_UP:
             case Item.DIRECTION_LEFT:
@@ -48,6 +49,8 @@ define(['./DOMGameField'], function(GameField) {
             case Item.DIRECTION_DOWN:
             case Item.DIRECTION_RIGHT:
                 return function(axis, speed) { return axis + speed };
+            case Item.DIRECTION_NONE:
+                return function(axis, speed) { return axis };
         }
     }
 

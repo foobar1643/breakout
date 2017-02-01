@@ -28,7 +28,7 @@ define(function() {
     }
 
     HashMap.prototype.clearBuckets = function() {
-        this.buckets = this.emptyBuckets;
+        this.buckets = this.getCleanBuckets();
     }
 
     HashMap.prototype.addGameItems = function(gameItems) {
@@ -56,6 +56,30 @@ define(function() {
             }
         }
         return hashIds;
+    }
+
+    HashMap.prototype.getNearbyObjects = function(object) {// TODO: Refactor this
+        var start = this.hash(object.y, object.x); // [row, col]
+        var end = this.hash(object.y + object.height, object.x + object.width); // [row, col]
+
+        var nearby = [];
+
+        for(var y = start[0]; y < end[0] + 1; y++) {
+            for(var x = start[1]; x < end[1] + 1; x++) {
+                var selfLocation = this.buckets[y][x].indexOf(object);
+                var spliced = Array.from(this.buckets[y][x]);
+                spliced.splice(selfLocation, 1);
+
+                for(var i = 0; i < spliced.length; i++) {
+                    nearby.push(spliced[i]);
+
+                }
+
+            }
+        }
+
+        return nearby;
+
     }
 
     HashMap.prototype.hash = function(y, x) {

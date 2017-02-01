@@ -4,14 +4,16 @@ define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], func
 
         this.detector = new CollisionDetection(this);
         this.radius = 7;
+        this.height = this.radius;
+        this.width = this.radius;
 
         this.state = Ball.STATE_PAUSED;
-        this.directionHorizontal = Item.DIRECTION_NONE;
+        this.directionHorizontal = Item.DIRECTION_LEFT;
         this.directionVertical = Item.DIRECTION_NONE;
     }
 
-    Ball.H_SPEED = 1.5;
-    Ball.V_SPEED = 3;
+    Ball.H_SPEED = 0.5;
+    Ball.V_SPEED = 2;
 
     Ball.STATE_PAUSED = 'paused';
     Ball.STATE_STICKED = 'sticked';
@@ -19,9 +21,9 @@ define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], func
 
     Ball.prototype = Object.create(Item.prototype);
 
-    Ball.prototype.render = function(context) {
+    Ball.prototype.render = function(context, hashMap) {
         if(this.state == Ball.STATE_FREE) {
-            this.freeStateMove();
+            this.freeStateMove(hashMap);
         }
 
         context.beginPath();
@@ -37,7 +39,7 @@ define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], func
         this.horizontalSpeed = Ball.H_SPEED;
         this.verticalSpeed = Ball.V_SPEED;
 
-        this.directionHorizontal = this.determineHorizontalDirection();
+        this.directionHorizontal = this.determineHorizontalDirection();//this.determineHorizontalDirection();
         this.directionVertical = Item.DIRECTION_UP;
         this.state = Ball.STATE_FREE;
     }
@@ -47,10 +49,15 @@ define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], func
             Item.DIRECTION_RIGHT : Item.DIRECTION_LEFT ;
     }
 
-    Ball.prototype.freeStateMove = function() {
-        if(this.detector.collision(this.directionHorizontal, this.directionVertical)) {
+    Ball.prototype.freeStateMove = function(hashMap) {
+        if(this.detector.collision(this.directionHorizontal, this.directionVertical, hashMap)) {
             var collisionType = this.detector.collisionType(this.directionHorizontal, this.directionVertical);
-            switch(collisionType) {
+            //console.log(collisionType);
+            //console.log('colided');
+            //this.flipVerticalDirection();
+            //return;
+            console.log(collisionType);
+            switch(collisionType) { // TODO: Fix wierd behavior when two types of collisions occur simultaneously 
                 case 'horizontal':
                     this.flipHorizontalDirection();
                     break;

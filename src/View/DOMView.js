@@ -21,7 +21,7 @@ define(function() {
 
     View.DRAW_HASHMAP = true;
     View.HASHMAP_STYLE = 'blue';
-    View.MAX_FPS = 60;
+    View.MAX_FPS = 1;
 
     View.prototype.line = function(fromX, fromY, toX, toY) {
         this.context.beginPath();
@@ -64,12 +64,16 @@ define(function() {
 
     View.prototype.renderGame = function() {
         for(var i = 0; i < this.gameItems.length; i++) {
-            this.gameItems[i].render(this.context);
+            this.gameItems[i].render(this.context, this.hashMap);
         }
     }
 
     View.prototype.resetGameItems = function(gameItems) {
         this.gameItems = gameItems;
+    }
+
+    View.prototype.requestAnimationFrameX = function() {
+        window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     View.prototype.gameLoop = function(timestamp) {

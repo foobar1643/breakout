@@ -12,7 +12,7 @@ define(function (require) {
         var gameItems = [gamePlatform, gameBall];
 
         // Populate game field with bricks
-        /*var brickX = 0;
+        var brickX = 0;
         var brickY = 0;
 
         for(var i = 0; i < 50; i++) {
@@ -25,7 +25,7 @@ define(function (require) {
                 brickX = brickX + Brick.WIDTH + 3;
             }
 
-        }*/
+        }
         return gameItems;
     }
 
