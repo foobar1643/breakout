@@ -1,7 +1,7 @@
-define(function() {
-    var HashMap = function(screenWidth, screenHeigth) {
-        this.hashmapCols = screenWidth / HashMap.CELL_SIZE;
-        this.hashmapRows = screenHeigth / HashMap.CELL_SIZE;
+define(['../Settings'], function(Settings) {
+    var HashMap = function() { // TODO: Throw a type error if current game field is not dividable by given cell size
+        this.hashmapCols = Settings.SCREEN_WIDTH / HashMap.CELL_SIZE;
+        this.hashmapRows = Settings.SCREEN_HEIGHT / HashMap.CELL_SIZE;
         this.cellSize = HashMap.CELL_SIZE;
 
         // Optimization step, so we don't have to run a cleaning loop every update.
@@ -28,7 +28,7 @@ define(function() {
     }
 
     HashMap.prototype.clearBuckets = function() {
-        this.buckets = this.getCleanBuckets();
+        this.buckets = this.getCleanBuckets(); // TODO: Preserve clean buckets in separate variable
     }
 
     HashMap.prototype.addGameItems = function(gameItems) {

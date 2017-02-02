@@ -1,8 +1,7 @@
-define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], function(Item, GameField, CollisionDetection) {
+define(['./Item', '../Settings'], function(Item, Settings) {
     var Ball = function() {
-        Item.call(this, 0, 0, 0, 0, 'green', Ball.H_SPEED, Ball.V_SPEED);
+        Item.call(this, 'circle', 0, 0, 0, 0, 'green', Ball.H_SPEED, Ball.V_SPEED);
 
-        this.detector = new CollisionDetection(this);
         this.radius = 7;
         this.height = this.radius;
         this.width = this.radius;
@@ -21,54 +20,28 @@ define(['./Item', './DOMGameField', '../Collision/BallCollisionDetection'], func
 
     Ball.prototype = Object.create(Item.prototype);
 
-    Ball.prototype.render = function(context, hashMap) {
-        if(this.state == Ball.STATE_FREE) {
-            this.freeStateMove(hashMap);
-        }
-
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-        context.fillStyle = 'green';
-        context.fill();
-        context.lineWidth = 1;
-        context.strokeStyle = '#000000';
-        context.stroke();
-    }
-
     Ball.prototype.setFreeState = function() {
         this.horizontalSpeed = Ball.H_SPEED;
         this.verticalSpeed = Ball.V_SPEED;
 
-        this.directionHorizontal = this.determineHorizontalDirection();//this.determineHorizontalDirection();
+        this.directionHorizontal = this.determineHorizontalDirection();
         this.directionVertical = Item.DIRECTION_UP;
         this.state = Ball.STATE_FREE;
     }
 
-    Ball.prototype.determineHorizontalDirection = function() {
-        return (this.x <= (GameField.WIDTH / 2) ) ?
-            Item.DIRECTION_RIGHT : Item.DIRECTION_LEFT ;
+    Ball.prototype.onCollision = function(collisionType) {
+        console.log(collisionType);
+        switch(collisionType) { // TODO: Fix wierd behavior when two types of collisions occur simultaneously
+            case 'horizontal':
+                return this.flipHorizontalDirection();
+            case 'vertical':
+                return this.flipVerticalDirection();
+        }
     }
 
-    Ball.prototype.freeStateMove = function(hashMap) {
-        if(this.detector.collision(this.directionHorizontal, this.directionVertical, hashMap)) {
-            var collisionType = this.detector.collisionType(this.directionHorizontal, this.directionVertical);
-            //console.log(collisionType);
-            //console.log('colided');
-            //this.flipVerticalDirection();
-            //return;
-            console.log(collisionType);
-            switch(collisionType) { // TODO: Fix wierd behavior when two types of collisions occur simultaneously 
-                case 'horizontal':
-                    this.flipHorizontalDirection();
-                    break;
-                case 'vertical':
-                    this.flipVerticalDirection();
-                    break;
-            }
-        }
-
-        this.move(this.directionHorizontal);
-        this.move(this.directionVertical);
+    Ball.prototype.determineHorizontalDirection = function() {
+        return (this.x <= (Settings.SCREEN_WIDTH / 2) ) ?
+            Item.DIRECTION_RIGHT : Item.DIRECTION_LEFT ;
     }
 
     Ball.prototype.flipHorizontalDirection = function() {
