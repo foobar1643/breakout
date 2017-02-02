@@ -1,0 +1,12 @@
+[ignore]
+.*/bower_components/.*
+.*/node_modules/.*
+.*/test/.*
+.*/tests/.*
+
+[include]
+./src/
+
+[libs]
+
+[options]

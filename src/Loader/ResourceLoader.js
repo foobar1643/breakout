@@ -1,4 +1,4 @@
-class CollisionManager {
+class ResourceLoader {
 
     constructor() {
 

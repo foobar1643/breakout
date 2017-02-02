@@ -1,0 +1,35 @@
+{
+  "name": "arkanoid",
+  "version": "0.0.5",
+  "description": "Simple breakout-style game",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foobar1643/arkanoid.git"
+  },
+  "author": "foobar1643",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foobar1643/arkanoid/issues"
+  },
+  "homepage": "https://github.com/foobar1643/arkanoid#readme",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-amd": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
+    "del": "^2.2.2",
+    "gulp-babel": "^6.1.2",
+    "gulp-flowtype": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-requirejs": "^1.0.0-rc1",
+    "gulp-uglify": "^2.0.1"
+},
+  "optionalDependencies": {
+    "eslint": "^3.14.1",
+    "babel-eslint": "^7.1.1",
+    "eslint-plugin-flowtype": "^2.30.0"
+  }
+}

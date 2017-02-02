@@ -1,2 +1,5 @@
+public/media/game/*
 node_modules
 bower_components
+srcES5
+build

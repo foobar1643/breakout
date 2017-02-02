@@ -4,7 +4,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Arkanoid Game</title>
         <link rel="stylesheet" href="media/stylesheet/style.css">
-        <script data-main="app" src="media/javascript/require.js"></script>
+        <!--<script data-main="media/Bootstrap" src="media/javascript/require.js"></script>!-->
+        <script src="media/javascript/require.js" ></script>
+        <script src="media/game/Arkanoid.js"></script>
+    <script>
+      (function(){
+        require(['Game']);
+      }());
+    </script>
     </head>
     <body>
         <div class="container">
@@ -12,7 +19,3 @@
         </div>
     </body>
 </html>
-
-<!-- <div id="game">
-    <canvas id="arkanoid-field" width='800' height='600'></canvas>
-</div> !-->
