@@ -1,7 +1,5 @@
-class HashMap {
-
+export default class HashMap {
     constructor() {
         
     }
-
 }

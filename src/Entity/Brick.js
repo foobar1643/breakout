@@ -1,9 +1,9 @@
-import Item from 'Item';
+import Item from './Item';
 
-class Brick extends Item {
+export default class Brick extends Item {
 
-    constructor() {
-        super();
+    constructor(x, y) {
+        super('rectangle', 'red', [x, y], [75, 20], [0, 0]);
     }
 
 }

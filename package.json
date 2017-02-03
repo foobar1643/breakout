@@ -25,8 +25,9 @@
     "gulp-flowtype": "^1.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-requirejs": "^1.0.0-rc1",
-    "gulp-uglify": "^2.0.1"
-},
+    "gulp-uglify": "^2.0.1",
+    "gulp-util": "^3.0.8"
+  },
   "optionalDependencies": {
     "eslint": "^3.14.1",
     "babel-eslint": "^7.1.1",

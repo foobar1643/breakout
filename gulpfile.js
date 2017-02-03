@@ -3,6 +3,7 @@ const babel = require('gulp-babel');
 const requirejs = require('gulp-requirejs');
 const del = require('del');
 const flow = require('gulp-flowtype');
+const util = require('gulp-util');
 
 var paths = {
     buildTemp: 'build/temp',
@@ -21,7 +22,7 @@ gulp.task('es6-to-amd', ['clean-build-temp'], function() {
         weak: false,
         killFlow: false,
         abort: true
-    }))
+    })).on('error', util.log)
     .pipe(babel({
         presets: ['latest'],
         plugins: [
@@ -41,6 +42,6 @@ gulp.task('default', ['es5-amd-clean', 'es6-to-amd'], function() {
         name: 'Game',
         baseUrl: paths.buildTemp,
         out: 'Arkanoid.js'
-    })
+    }).on('error', util.log)
     .pipe(gulp.dest(paths.es5Game));
 });
