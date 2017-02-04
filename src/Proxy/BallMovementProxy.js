@@ -1,9 +1,11 @@
-import MovementProxy from 'MovementProxy';
+/* @flow */
+import MovementProxy from './MovementProxy';
+import Ball from '../Entity/Ball';
 
-class BallMovementProxy extends MovementProxy {
+export default class BallMovementProxy extends MovementProxy {
 
-    constructor() {
-        super();
+    constructor(ball: Ball) {
+        super(ball);
     }
 
 }

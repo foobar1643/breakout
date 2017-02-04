@@ -1,3 +1,9 @@
+export const DIRECTION_NONE = 'none';
+export const DIRECTION_UP = 'up';
+export const DIRECTION_DOWN = 'down';
+export const DIRECTION_LEFT = 'left';
+export const DIRECTION_RIGHT = 'right';
+
 export default class Item {
 
     _type: string;
@@ -30,6 +36,20 @@ export default class Item {
         this._position = position;
         this._size = size;
         this._speed = speed;
+    }
+
+    movingMathOperation(direction) {
+        switch(direction) {
+            case DIRECTION_UP:
+            case DIRECTION_LEFT:
+                return function(axis, speed) { return axis - speed; };
+            case DIRECTION_DOWN:
+            case DIRECTION_RIGHT:
+                return function(axis, speed) { return axis + speed; };
+            case DIRECTION_NONE:
+                return function(axis, speed) { return axis; };
+        }
+        throw new TypeError("Can't find math operation for direction " + direction);
     }
 
 }

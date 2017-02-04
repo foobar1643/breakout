@@ -4,6 +4,7 @@ import * as Settings from './Settings';
 import GameRender from "./Render/GameRender";
 import HashMap from './Utility/HashMap';
 import ResourceLoader from './Loader/ResourceLoader';
+import KeyboardController from './Controller/Keyboard';
 
 const GAME_GOING = 'going';
 const GAME_PAUSED = 'paused';
@@ -16,12 +17,15 @@ class Game {
     _hashMap: HashMap;
     _items: Array<typeof Item>;
     _gameState: string;
+    _keyboard: KeyboardController;
 
     constructor() {
         this._loader = new ResourceLoader();
         this._render = new GameRender();
         //this.hashMap = new HashMap();
         this._items = this._loader.getItems();
+        let proxy = this._loader.getPlatformProxy();
+        this._keyboard = new KeyboardController(proxy);
         this._gameState = GAME_GOING;
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }

@@ -18,13 +18,13 @@ export default class Platform extends Item {
     }
 
     releaseBall() {
-        if(this.ballPresent()) {
+        if(this.ballBound()) {
             this._ball.unbind();
             this._ball = null;
         }
     }
 
-    ballPresent() {
+    ballBound() {
         return (this._ball != null);
     }
 

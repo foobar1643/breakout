@@ -31,7 +31,7 @@ export default class Render {
         context.fill();
 
         context.strokeStyle = 'black';
-        context.lineWidth = 2;
+        context.lineWidth = 1;
         context.stroke();
     }
 
