@@ -21,7 +21,9 @@ export default class GameRender extends Render {
         let gameContainer = document.getElementById('game-container');
         if(gameContainer != null) {
             gameContainer.appendChild(this._canvas);
+            return;
         }
+        throw new ReferenceError('Could not find parent element for game canvas.');
     }
 
     _determineRenderFunction(item: typeof Item): any {
@@ -31,7 +33,7 @@ export default class GameRender extends Render {
         };
 
         if(renderTypes[item.type] == "undefined") {
-            throw new TypeError("Can't find a render function of '${item.type}' type");
+            throw new TypeError("Could not find a render function for given item type.");
         }
 
         return renderTypes[item.type];

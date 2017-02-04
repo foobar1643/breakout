@@ -14,6 +14,7 @@ export default class ResourceLoader {
     _loadItems() {
         let platform = new Platform(180, 20);
         let ball = new Ball();
+        ball.bindToPlatform(platform);
         this._items.push(platform, ball);
     }
 
