@@ -6,15 +6,15 @@ import CollisionManager from '../Collision/CollisionManager';
 
 export default class ProxyPlatform extends MovementProxy {
 
-    _ballProxy: ProxyBall;
+    _proxyBall: ProxyBall;
     _platform: Platform;
     _hashMap: any;
     _detector: CollisionManager;
 
-    constructor(platform: Platform, ballProxy: ProxyBall, map: any) {
+    constructor(platform: Platform, proxyBall: ProxyBall, map: any) {
         super(platform);
         this._platform = platform;
-        this._ballProxy = ballProxy;
+        this._proxyBall = proxyBall;
         this._hashMap = map;
         this._detector = new CollisionManager(this._platform, this._hashMap);
     }
@@ -25,11 +25,16 @@ export default class ProxyPlatform extends MovementProxy {
             return;
         }
 
-        super.move(hDirection, vDirection); // Move the ball
+        super.move(hDirection, vDirection);
 
         if(this._platform.ballBound()) {
-            this._ballProxy.move(hDirection, vDirection); // Move ball only if the platform moved
+            this._proxyBall.move(hDirection, vDirection);
         }
+    }
+
+    unbindBall() {
+        this._platform.releaseBall();
+        this._proxyBall.setFreeState();
     }
 
 }

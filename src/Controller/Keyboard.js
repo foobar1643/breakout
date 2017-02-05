@@ -24,6 +24,9 @@ export default class KeyboardController {
             case 'KeyA':
                 this._proxy.move(DIRECTION_LEFT, DIRECTION_NONE);
                 break;
+            case 'Space':
+                this._proxy.unbindBall();
+                break;
         }
     }
 

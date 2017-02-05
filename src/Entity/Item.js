@@ -53,7 +53,7 @@ export default class Item {
             case DIRECTION_NONE:
                 return function(axis, speed) { return axis; };
         }
-        throw new TypeError("Can't find math operation for direction " + direction);
+        throw new TypeError("Can't find math operation for direction " + direction); // ES6 Template Literals?
     }
 
 }

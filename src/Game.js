@@ -16,6 +16,7 @@ class Game {
     _frameMs: number;
     _hashMap: HashMap;
     _items: Array<typeof Item>;
+    _active: Array<any>;
     _gameState: string;
     _keyboard: KeyboardController;
 
@@ -23,6 +24,7 @@ class Game {
         this._loader = new ResourceLoader();
         this._render = new GameRender();
         this._items = this._loader.getItems();
+        this._active = this._loader.getActiveItems();
         this._hashMap = this._loader.loadHashMap();
         this._keyboard = new KeyboardController(this, this._loader.getPlatformProxy());
         this._gameState = GAME_GOING;
@@ -36,7 +38,7 @@ class Game {
             // Add game items to the spatial hash map
             this._hashMap.addItems(this._items);
             // Move items
-            //this.moveActive();
+            this.moveActive();
             // Prepare the screen for rendering game items
             this._render.prepareScreen();
             // Render game items on the screen
@@ -51,6 +53,12 @@ class Game {
 
         this._frameMs = time;
         window.requestAnimationFrame(this.gameLoop.bind(this));
+    }
+
+    moveActive() {
+        for(let proxy of this._active) {
+            proxy.freeStateMove();
+        }
     }
 
     stepAnimation() {
