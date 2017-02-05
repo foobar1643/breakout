@@ -5,7 +5,7 @@ import {CELL_SIZE} from '../Utility/HashMap';
 import Render from './Render';
 
 const HASHMAP_LINE_STYLE = 'blue';
-const HASHMAP_LINE_SIZE = 2;
+const HASHMAP_LINE_SIZE = 1;
 
 export default class GameRender extends Render {
 

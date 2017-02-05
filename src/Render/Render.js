@@ -16,10 +16,11 @@ export default class Render {
     }
 
     _rectangle(item: Item, context: any) {
-        context.strokeStyle = 'black';
-        context.lineWidth = 2;
-        context.strokeRect(item.x, item.y, item.width, item.height);
-
+        if(item.stroke) {
+            context.strokeStyle = 'black';
+            context.lineWidth = 2;
+            context.strokeRect(item.x, item.y, item.width, item.height);
+        }
         context.fillStyle = item.color;
         context.fillRect(item.x, item.y, item.width, item.height);
     }

@@ -1,9 +1,12 @@
-import CollisionManager from 'CollisionManager';
+import CollisionManager from './CollisionManager';
 
-class PlatformCollisionManager extends CollisionManager {
+export default class PlatformCollisionManager {
 
-    constructor() {
-        super();
+    _platform: Platform;
+    _hashMap: HashMap;
+
+    constructor(platform, hashMap) {
+        
     }
 
 }

@@ -22,10 +22,9 @@ class Game {
     constructor() {
         this._loader = new ResourceLoader();
         this._render = new GameRender();
-        this._hashMap = new HashMap();
         this._items = this._loader.getItems();
-        let proxy = this._loader.getPlatformProxy();
-        this._keyboard = new KeyboardController(this, proxy); // Load this in resource loader
+        this._hashMap = this._loader.loadHashMap();
+        this._keyboard = new KeyboardController(this, this._loader.getPlatformProxy());
         this._gameState = GAME_GOING;
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }

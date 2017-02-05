@@ -1,4 +1,4 @@
-import CollisionManager from 'CollisionManager';
+import CollisionManager from './CollisionManager';
 
 class BallCollisionManager extends CollisionManager {
 

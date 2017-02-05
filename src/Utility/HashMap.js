@@ -17,8 +17,8 @@ export default class HashMap {
      * @return {type}  description
      */
     constructor() {
-        this._rows = Settings.SCREEN_HEIGHT / CELL_SIZE;
-        this._cols = Settings.SCREEN_WIDTH / CELL_SIZE;
+        this._rows = (Settings.SCREEN_HEIGHT / CELL_SIZE) + 1;
+        this._cols = (Settings.SCREEN_WIDTH / CELL_SIZE) + 1;
         this._validateCellSize();
         this._buckets = this._generateCleanBuckets();
         /*this._generateCleanBuckets();
@@ -119,6 +119,7 @@ export default class HashMap {
     addItem(item: Item) {
         var buckets = this._getBucketIds(item);
         for(let bucket of buckets) {
+            //console.log("Y: %f, X: %f", bucket.y, bucket.x);
             this._buckets[bucket.y][bucket.x].push(item);
         }
     }
@@ -152,5 +153,4 @@ export default class HashMap {
     hash(x: number, y: number) {
         return { "x": Math.floor(x / CELL_SIZE), "y": Math.floor(y / CELL_SIZE)};
     }
-
 }

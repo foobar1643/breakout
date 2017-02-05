@@ -1,11 +1,11 @@
-import PlatformMovementProxy from '../Proxy/PlatformMovementProxy';
+import ProxyPlatform from '../Proxy/ProxyPlatform';
 import {DIRECTION_NONE, DIRECTION_RIGHT, DIRECTION_LEFT} from '../Entity/Item';
 
 export default class KeyboardController {
 
-    _proxy: PlatformMovementProxy;
+    _proxy: ProxyPlatform;
 
-    constructor(game, proxy: PlatformMovementProxy) {
+    constructor(game, proxy: ProxyPlatform) {
         this._proxy = proxy;
         this._game = game;
 
@@ -15,9 +15,10 @@ export default class KeyboardController {
     keyDownEvent(event) {
         switch(event.code) {
             case 'KeyQ':
-                this._game.stepAnimation();
+                //this._game.stepAnimation();
                 break;
             case 'KeyD':
+                //console.log(this._game._hashMap.getNearbyItems(this._proxy._platform));
                 this._proxy.move(DIRECTION_RIGHT, DIRECTION_NONE);
                 break;
             case 'KeyA':

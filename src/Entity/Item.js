@@ -11,6 +11,7 @@ export default class Item {
     _position: [number, number]; // [x, y]
     _size: [number, number]; // [width, height]
     _speed: [number, number] // [horizontal, vertical]
+    _stroke: boolean;
 
     get color() { return this._color; };
     get type() { return this._type; };
@@ -30,12 +31,15 @@ export default class Item {
     get vSpeed() { return this._speed[1]; };
     set vSpeed(speed) { this._speed[1] = speed; };
 
-    constructor(type: string, color: string, position: [number, number], size: [number, number], speed: [number, number]) {
+    get stroke() { return this._stroke; };
+
+    constructor(type: string, color: string, position: [number, number], size: [number, number], speed: [number, number], stroke = true) {
         this._type = type;
         this._color = color;
         this._position = position;
         this._size = size;
         this._speed = speed;
+        this._stroke = stroke;
     }
 
     movingMathOperation(direction) {
