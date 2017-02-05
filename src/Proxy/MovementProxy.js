@@ -13,9 +13,6 @@ export default class MovementProxy {
         let xMathOperation = this._object.movingMathOperation(hDirection);
         let yMathOperation = this._object.movingMathOperation(vDirection);
 
-        console.log(xMathOperation(this._object.x, this._object.hSpeed));
-        console.log(yMathOperation(this._object.y, this._object.vSpeed));
-
         this._object.x = xMathOperation(this._object.x, this._object.hSpeed);
         this._object.y = yMathOperation(this._object.y, this._object.vSpeed);
     }

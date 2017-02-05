@@ -1,7 +1,11 @@
 /* @flow */
 import * as Settings from '../Settings';
 import Item from '../Entity/Item';
+import {CELL_SIZE} from '../Utility/HashMap';
 import Render from './Render';
+
+const HASHMAP_LINE_STYLE = 'blue';
+const HASHMAP_LINE_SIZE = 2;
 
 export default class GameRender extends Render {
 
@@ -39,10 +43,27 @@ export default class GameRender extends Render {
         return renderTypes[item.type];
     }
 
+    _hashMapGrid() {
+        if(Settings.DRAW_HASHMAP === true) {
+            let x = 0, y = 0;
+            // Think about optimizing this (can be done in one loop)
+            for(var i = 0; i < Math.floor(this._canvas.height / CELL_SIZE) + 1; i++) { // Rows
+                super._line(HASHMAP_LINE_SIZE, HASHMAP_LINE_STYLE, [0, y], [this._canvas.width, y]);
+                y = y + CELL_SIZE;
+            }
+
+            for(var i = 0; i < Math.floor(this._canvas.width / CELL_SIZE) + 1; i++) { // Cols
+                super._line(HASHMAP_LINE_SIZE, HASHMAP_LINE_STYLE, [x, 0], [x, this._canvas.width]);
+                x = x + CELL_SIZE;
+            }
+        }
+    }
+
     prepareScreen() {
         this._context.fillStyle = 'rgb(255, 255, 255)';
         this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
         this._context.fillRect(0, 0, this._canvas.width, this._canvas.height);
+        this._hashMapGrid();
     }
 
     renderItems(items: Array<typeof Item>) {

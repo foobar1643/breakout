@@ -22,10 +22,10 @@ class Game {
     constructor() {
         this._loader = new ResourceLoader();
         this._render = new GameRender();
-        //this.hashMap = new HashMap();
+        this._hashMap = new HashMap();
         this._items = this._loader.getItems();
         let proxy = this._loader.getPlatformProxy();
-        this._keyboard = new KeyboardController(proxy);
+        this._keyboard = new KeyboardController(this, proxy); // Load this in resource loader
         this._gameState = GAME_GOING;
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -33,9 +33,9 @@ class Game {
     gameLoop(time: number) {
         if(this._gameState === GAME_GOING) {
             // Clear every bucket in the spatial hash map
-            //this.hashMap.clearBuckets();
+            this._hashMap.clearBuckets();
             // Add game items to the spatial hash map
-            //this.hashMap.addItems(this.items);
+            this._hashMap.addItems(this._items);
             // Move items
             //this.moveActive();
             // Prepare the screen for rendering game items
@@ -51,6 +51,10 @@ class Game {
         }
 
         this._frameMs = time;
+        window.requestAnimationFrame(this.gameLoop.bind(this));
+    }
+
+    stepAnimation() {
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 

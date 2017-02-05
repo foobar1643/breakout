@@ -35,4 +35,20 @@ export default class Render {
         context.stroke();
     }
 
+
+
+    /*_hashMap(cellSize: number) {
+        var x = 0, y = 0;
+        // Think about optimizing this (can be done in one loop)
+        for(var i = 0; i < Math.floor(this.canvas.height / HashMap.CELL_SIZE); i++) { // Rows
+            this.line(Render.HASHMAP_LINE_SIZE, Render.HASHMAP_LINE_STYLE, [0, y], [this.canvas.width, y]);
+            y = y + HashMap.CELL_SIZE;
+        }
+
+        for(var i = 0; i < Math.floor(this.canvas.width / HashMap.CELL_SIZE); i++) { // Cols
+            this.line(Render.HASHMAP_LINE_SIZE, Render.HASHMAP_LINE_STYLE, [x, 0], [x, this.canvas.width]);
+            x = x + HashMap.CELL_SIZE;
+        }
+    }*/
+
 }

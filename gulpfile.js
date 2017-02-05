@@ -17,12 +17,12 @@ gulp.task('clean-build-temp', function(){
 
 gulp.task('es6-to-amd', ['clean-build-temp'], function() {
     return gulp.src(paths.babel)
-    .pipe(flow({
+    /*.pipe(flow({
         all: false,
         weak: false,
         killFlow: false,
         abort: true
-    })).on('error', util.log)
+    })).on('error', util.log)*/
     .pipe(babel({
         presets: ['latest'],
         plugins: [
