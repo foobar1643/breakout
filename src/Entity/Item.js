@@ -11,6 +11,7 @@ export default class Item {
     _position: [number, number]; // [x, y]
     _size: [number, number]; // [width, height]
     _speed: [number, number] // [horizontal, vertical]
+    _direction: [string, string]
     _stroke: boolean;
 
     get color() { return this._color; };
@@ -31,6 +32,11 @@ export default class Item {
     get vSpeed() { return this._speed[1]; };
     set vSpeed(speed) { this._speed[1] = speed; };
 
+    get hDirection() { return this._direction[0]; };
+    set hDirection(direction) { this._direction[0] = direction; };
+    get vDirection() { return this._direction[1]; };
+    set vDirection(direction) { this._direction[1] = direction; };
+
     get stroke() { return this._stroke; };
 
     constructor(type: string, color: string, position: [number, number], size: [number, number], speed: [number, number], stroke = true) {
@@ -39,6 +45,7 @@ export default class Item {
         this._position = position;
         this._size = size;
         this._speed = speed;
+        this._direction = [DIRECTION_NONE, DIRECTION_NONE];
         this._stroke = stroke;
     }
 
@@ -54,6 +61,13 @@ export default class Item {
                 return function(axis, speed) { return axis; };
         }
         throw new TypeError("Can't find math operation for direction " + direction); // ES6 Template Literals?
+    }
+
+    getNextPosition() {
+        let xMathOperation = this.movingMathOperation(this.hDirection);
+        let yMathOperation = this.movingMathOperation(this.vDirection);
+        console.log("h: " + this.hDirection + " v: " + this.vDirection);
+        return { "x": xMathOperation(this.x, this.hSpeed), "y": yMathOperation(this.y, this.vSpeed) };
     }
 
 }

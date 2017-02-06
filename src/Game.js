@@ -24,8 +24,8 @@ class Game {
         this._loader = new ResourceLoader();
         this._render = new GameRender();
         this._items = this._loader.getItems();
-        this._active = this._loader.getActiveItems();
         this._hashMap = this._loader.loadHashMap();
+        this._active = this._loader.getActiveItems(this._hashMap);
         this._keyboard = new KeyboardController(this, this._loader.getPlatformProxy());
         this._gameState = GAME_GOING;
         window.requestAnimationFrame(this.gameLoop.bind(this));
@@ -46,13 +46,13 @@ class Game {
         }
 
         // Iterate game loop
-        if(time < this._frameMs + (1000 / Settings.MAX_FPS)) {
-            window.requestAnimationFrame(this.gameLoop.bind(this));
-            return;
-        }
+        //if(time < this._frameMs + (1000 / Settings.MAX_FPS)) {
+        //    window.requestAnimationFrame(this.gameLoop.bind(this));
+        //    return;
+        //}
 
-        this._frameMs = time;
-        window.requestAnimationFrame(this.gameLoop.bind(this));
+        //this._frameMs = time;
+        //window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     moveActive() {

@@ -19,22 +19,31 @@ export default class ProxyPlatform extends MovementProxy {
         this._detector = new CollisionManager(this._platform, this._hashMap);
     }
 
-    move(hDirection: string, vDirection: string) {
-
-        if(this._detector.collision(hDirection, vDirection)) {
+    move() {
+        let position = this._object.getNextPosition();
+        if(this._detector.collision(position) !== false) {
             return;
         }
 
-        super.move(hDirection, vDirection);
+        super.move(position);
 
         if(this._platform.ballBound()) {
-            this._proxyBall.move(hDirection, vDirection);
+            this._proxyBall.move();
         }
     }
 
     unbindBall() {
-        this._platform.releaseBall();
-        this._proxyBall.setFreeState();
+        if(this._platform.ballBound()) {
+            console.log('unbinding');
+            this._platform.releaseBall();
+        }
+    }
+
+    setDirections(horizontal: string, vertical: string) {
+        super.setDirections(horizontal, vertical);
+        if(this._platform.ballBound()) {
+            this._proxyBall.setDirections(horizontal, vertical);
+        }
     }
 
 }

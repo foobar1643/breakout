@@ -15,14 +15,16 @@ export default class KeyboardController {
     keyDownEvent(event) {
         switch(event.code) {
             case 'KeyQ':
-                //this._game.stepAnimation();
+                this._game.stepAnimation();
                 break;
             case 'KeyD':
                 //console.log(this._game._hashMap.getNearbyItems(this._proxy._platform));
-                this._proxy.move(DIRECTION_RIGHT, DIRECTION_NONE);
+                this._proxy.setDirections(DIRECTION_RIGHT, DIRECTION_NONE);
+                this._proxy.move();
                 break;
             case 'KeyA':
-                this._proxy.move(DIRECTION_LEFT, DIRECTION_NONE);
+                this._proxy.setDirections(DIRECTION_LEFT, DIRECTION_NONE);
+                this._proxy.move();
                 break;
             case 'Space':
                 this._proxy.unbindBall();

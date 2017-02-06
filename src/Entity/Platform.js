@@ -25,7 +25,7 @@ export default class Platform extends Item {
     }
 
     ballBound() {
-        return (this._ball != null);
+        return (this._ball !== null);
     }
 
 }

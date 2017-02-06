@@ -12,6 +12,7 @@ export default class ResourceLoader {
     _items: Array<typeof Item> // Store items in associative array (object)
     _active: Array<any>; // This should be proxies only
     _platformProxy: ProxyPlatform;
+    _proxyBall: ProxyBall;
     _hashMap: HashMap;
 
     constructor() {
@@ -64,11 +65,19 @@ export default class ResourceLoader {
         return this._items;
     }
 
-    getActiveItems() {
+    _loadProxyBall() {
+        if(this._proxyBall === undefined) {
+            console.log('created proxy ball');
+            this._proxyBall = new ProxyBall(this._items[1], this._hashMap);
+        }
+        return this._proxyBall;
+    }
+
+    getActiveItems(hashMap: any) {
         if(this.itemsLoaded() === false) {
             throw new ReferenceError('Could not get active items, load the items frist.');
         }
-        return [new ProxyBall(this._items[1])];
+        return [this._loadProxyBall()];
     }
 
     getPlatformProxy() {
@@ -80,7 +89,7 @@ export default class ResourceLoader {
             return this._platformProxy;
         }
 
-        let ballProxy = new ProxyBall(this._items[1]);
+        let ballProxy = this._loadProxyBall();
         this._platformProxy = new ProxyPlatform(this._items[0], ballProxy, this._hashMap);
         return this._platformProxy;
     }

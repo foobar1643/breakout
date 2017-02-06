@@ -6,24 +6,35 @@ export default class CollisionManager {
     constructor(object, hashMap) {
         this._object = object;
         this._hashMap = hashMap;
+
     }
 
-    collision(hDirection, vDirection) {
-        let xMathOperation = this._object.movingMathOperation(hDirection);
-        let yMathOperation = this._object.movingMathOperation(vDirection);
+    /**
+     *         if((position[mainAxis] < item[mainAxis] + item[mainUnit]  && position[mainAxis] + this._object[mainUnit]  > item[mainAxis])) {
+                 if((position[checkAxis] < item[checkAxis] + item[checkUnit] && position[checkAxis] + this._object[checkUnit] > item[checkAxis])) {
+                     return true;
+                 }
+             }
+     */
 
-        let x = xMathOperation(this._object.x, this._object.hSpeed);
-        let y = yMathOperation(this._object.y, this._object.vSpeed);
+    _collides(position, item) {
 
+        if (position.x < item.x + item.width &&
+            position.x + this._object.width > item.x &&
+            position.y < item.y + item.height &&
+            this._object.height + position.y > item.y) {
+                return true;
+        }
+
+        return false;
+    }
+
+    collision(position) {
         let nearby = this._hashMap.getNearbyItems(this._object);
 
         for(let item of nearby) {
-            if (x < item.x + item.width &&
-                x + this._object.width > item.x &&
-                y < item.y + item.height &&
-                this._object.height + y > item.y) {
-                    return true;
-            }
+            //console.log('collidesH: ' + this._collides(position, item) + ' collidesV: ' + this._collidesV(position, item));
+            if(this._collides(position, item)) return 'vertical';
         }
         return false;
     }
