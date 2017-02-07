@@ -46,13 +46,13 @@ class Game {
         }
 
         // Iterate game loop
-        //if(time < this._frameMs + (1000 / Settings.MAX_FPS)) {
-        //    window.requestAnimationFrame(this.gameLoop.bind(this));
-        //    return;
-        //}
+        if(time < this._frameMs + (1000 / Settings.MAX_FPS)) {
+            window.requestAnimationFrame(this.gameLoop.bind(this));
+            return;
+        }
 
-        //this._frameMs = time;
-        //window.requestAnimationFrame(this.gameLoop.bind(this));
+        this._frameMs = time;
+        window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
     moveActive() {

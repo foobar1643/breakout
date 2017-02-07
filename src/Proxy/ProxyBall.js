@@ -28,13 +28,14 @@ export default class ProxyBall extends MovementProxy {
             let position = this._ball.getNextPosition();
             let collision = this._detector.collision(position);
             if(collision !== false) {
+                console.log(collision);
                 switch(collision) {
                     case 'vertical':
-                        return this._ball.flipHorizontalDirection();
-                    case 'horizontal':
                         return this._ball.flipVerticalDirection();
+                    case 'horizontal':
+                        return this._ball.flipHorizontalDirection();
                 }
-                return;
+                throw new TypeError('undefined collision type');
             }
 
             super.move(position);

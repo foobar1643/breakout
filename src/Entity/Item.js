@@ -66,7 +66,6 @@ export default class Item {
     getNextPosition() {
         let xMathOperation = this.movingMathOperation(this.hDirection);
         let yMathOperation = this.movingMathOperation(this.vDirection);
-        console.log("h: " + this.hDirection + " v: " + this.vDirection);
         return { "x": xMathOperation(this.x, this.hSpeed), "y": yMathOperation(this.y, this.vSpeed) };
     }
 

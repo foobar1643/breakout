@@ -15,7 +15,7 @@ export default class KeyboardController {
     keyDownEvent(event) {
         switch(event.code) {
             case 'KeyQ':
-                this._game.stepAnimation();
+            //    this._game.stepAnimation();
                 break;
             case 'KeyD':
                 //console.log(this._game._hashMap.getNearbyItems(this._proxy._platform));

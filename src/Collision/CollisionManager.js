@@ -19,10 +19,43 @@ export default class CollisionManager {
 
     _collides(position, item) {
 
-        if (position.x < item.x + item.width &&
+        let left = item.x;
+        let right = item.x + item.width;
+
+        let top = item.y;
+        let bottom = item.y + item.height;
+
+        let objPosY = position.y + this._object.height;
+        let objPosX = position.x + this._object.width;
+
+        /*if (position.x < item.x + item.width &&
             position.x + this._object.width > item.x &&
             position.y < item.y + item.height &&
             this._object.height + position.y > item.y) {
+                return true;
+        }*/
+
+        if( (position.x >= item.x - this._object.width && position.x <= item.x + item.width + this._object.width) &&
+            (position.y >= item.y && position.y <= item.y + item.height)) {
+                return true;
+        }
+
+        return false;
+    }
+
+    _collidesV(position, item) {
+
+        let left = item.x;
+        let right = item.x + item.width;
+
+        let top = item.y;
+        let bottom = item.y + item.height;
+
+        let objPosY = position.y + this._object.height;
+        let objPosX = position.x + this._object.width;
+
+        if( (position.y >= item.y - this._object.height && position.y <= item.y + item.height + this._object.height) &&
+            (position.x >= item.x && position.x <= item.x + item.width)) {
                 return true;
         }
 
@@ -34,7 +67,12 @@ export default class CollisionManager {
 
         for(let item of nearby) {
             //console.log('collidesH: ' + this._collides(position, item) + ' collidesV: ' + this._collidesV(position, item));
-            if(this._collides(position, item)) return 'vertical';
+            switch(true) {
+                case this._collidesV(position, item):
+                    return 'vertical';
+                case this._collides(position, item):
+                    return 'horizontal';
+            }
         }
         return false;
     }

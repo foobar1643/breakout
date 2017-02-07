@@ -7,8 +7,8 @@ export const STATE_PAUSED = 'paused';
 export const STATE_STICKED = 'sticked';
 export const STATE_FREE = 'free';
 
-const H_SPEED = 2;
-const V_SPEED = 0;
+const H_SPEED = 0.9;
+const V_SPEED = 1.8;
 
 export default class Ball extends Item {
 
