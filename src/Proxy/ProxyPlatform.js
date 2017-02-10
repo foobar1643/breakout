@@ -21,7 +21,9 @@ export default class ProxyPlatform extends MovementProxy {
 
     move() {
         let position = this._object.getNextPosition();
-        if(this._detector.collision(position) !== false) {
+        let collision = this._detector.collision(position);
+        if(collision !== false) {
+            console.log(collision);
             return;
         }
 

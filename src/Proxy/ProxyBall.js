@@ -1,20 +1,20 @@
 /* @flow */
 import MovementProxy from './MovementProxy';
 import Ball from '../Entity/Ball';
-import CollisionManager from '../Collision/CollisionManager';
+import BallCollisionManager from '../Collision/BallCollisionManager';
 import {STATE_FREE} from '../Entity/Ball';
 
 export default class ProxyBall extends MovementProxy {
 
     _ball: Ball;
     _hashMap: any;
-    _detector: CollisionManager;
+    _detector: BallCollisionManager;
 
     constructor(ball: Ball, map: any) {
         super(ball);
         this._ball = ball;
         this._hashMap = map;
-        this._detector = new CollisionManager(this._ball, this._hashMap);
+        this._detector = new BallCollisionManager(this._ball, this._hashMap);
     }
 
     move() {

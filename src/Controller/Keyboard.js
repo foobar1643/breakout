@@ -1,5 +1,5 @@
 import ProxyPlatform from '../Proxy/ProxyPlatform';
-import {DIRECTION_NONE, DIRECTION_RIGHT, DIRECTION_LEFT} from '../Entity/Item';
+import {DIRECTION_NONE, DIRECTION_UP, DIRECTION_DOWN, DIRECTION_RIGHT, DIRECTION_LEFT} from '../Entity/Item';
 
 export default class KeyboardController {
 
@@ -13,7 +13,7 @@ export default class KeyboardController {
     }
 
     keyDownEvent(event) {
-        switch(event.code) {
+        switch(event.code) { // Change this to keyCode
             case 'KeyQ':
             //    this._game.stepAnimation();
                 break;
@@ -24,6 +24,14 @@ export default class KeyboardController {
                 break;
             case 'KeyA':
                 this._proxy.setDirections(DIRECTION_LEFT, DIRECTION_NONE);
+                this._proxy.move();
+                break;
+            case 'KeyW':
+                this._proxy.setDirections(DIRECTION_NONE, DIRECTION_UP);
+                this._proxy.move();
+                break;
+            case 'KeyS':
+                this._proxy.setDirections(DIRECTION_NONE, DIRECTION_DOWN);
                 this._proxy.move();
                 break;
             case 'Space':

@@ -3,6 +3,7 @@ import * as Settings from '../Settings';
 import Item from '../Entity/Item';
 import Platform from '../Entity/Platform';
 import Ball from '../Entity/Ball';
+import Brick from '../Entity/Brick';
 import ProxyBall from '../Proxy/ProxyBall';
 import ProxyPlatform from '../Proxy/ProxyPlatform';
 import HashMap from '../Utility/HashMap';
@@ -24,7 +25,24 @@ export default class ResourceLoader {
         let ball = new Ball();
         ball.bindToPlatform(platform);
         this._items.push(platform, ball);
+        this._loadGameField();
         this._loadFieldCollision();
+    }
+
+    _loadGameField() {
+        var brickX = 10;
+        var brickY = 5;
+
+        for(var i = 0; i < 50; i++) {
+            this._items.push(new Brick(brickX, brickY));
+            if(brickX + 75 >= Settings.SCREEN_WIDTH - 75) {
+                brickX = 10;
+                brickY = brickY + 20 + 3;
+            } else {
+                brickX = brickX + 75 + 3;
+            }
+
+        }
     }
 
     _loadFieldCollision() {
@@ -73,7 +91,7 @@ export default class ResourceLoader {
         return this._proxyBall;
     }
 
-    getActiveItems(hashMap: any) {
+    getActiveItems() {
         if(this.itemsLoaded() === false) {
             throw new ReferenceError('Could not get active items, load the items frist.');
         }

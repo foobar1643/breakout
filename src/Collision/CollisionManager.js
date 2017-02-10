@@ -9,33 +9,9 @@ export default class CollisionManager {
 
     }
 
-    /**
-     *         if((position[mainAxis] < item[mainAxis] + item[mainUnit]  && position[mainAxis] + this._object[mainUnit]  > item[mainAxis])) {
-                 if((position[checkAxis] < item[checkAxis] + item[checkUnit] && position[checkAxis] + this._object[checkUnit] > item[checkAxis])) {
-                     return true;
-                 }
-             }
-     */
-
     _collides(position, item) {
 
-        let left = item.x;
-        let right = item.x + item.width;
-
-        let top = item.y;
-        let bottom = item.y + item.height;
-
-        let objPosY = position.y + this._object.height;
-        let objPosX = position.x + this._object.width;
-
-        /*if (position.x < item.x + item.width &&
-            position.x + this._object.width > item.x &&
-            position.y < item.y + item.height &&
-            this._object.height + position.y > item.y) {
-                return true;
-        }*/
-
-        if( (position.x >= item.x - this._object.width && position.x <= item.x + item.width + this._object.width) &&
+        if( (position.x >= item.x - this._object.width && position.x <= item.x + item.width) &&
             (position.y >= item.y && position.y <= item.y + item.height)) {
                 return true;
         }
@@ -44,15 +20,6 @@ export default class CollisionManager {
     }
 
     _collidesV(position, item) {
-
-        let left = item.x;
-        let right = item.x + item.width;
-
-        let top = item.y;
-        let bottom = item.y + item.height;
-
-        let objPosY = position.y + this._object.height;
-        let objPosX = position.x + this._object.width;
 
         if( (position.y >= item.y - this._object.height && position.y <= item.y + item.height + this._object.height) &&
             (position.x >= item.x && position.x <= item.x + item.width)) {
@@ -66,7 +33,6 @@ export default class CollisionManager {
         let nearby = this._hashMap.getNearbyItems(this._object);
 
         for(let item of nearby) {
-            //console.log('collidesH: ' + this._collides(position, item) + ' collidesV: ' + this._collidesV(position, item));
             switch(true) {
                 case this._collidesV(position, item):
                     return 'vertical';

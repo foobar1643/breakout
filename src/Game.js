@@ -9,6 +9,7 @@ import KeyboardController from './Controller/Keyboard';
 const GAME_GOING = 'going';
 const GAME_PAUSED = 'paused';
 
+
 class Game {
 
     _loader: ResourceLoader;
@@ -25,7 +26,7 @@ class Game {
         this._render = new GameRender();
         this._items = this._loader.getItems();
         this._hashMap = this._loader.loadHashMap();
-        this._active = this._loader.getActiveItems(this._hashMap);
+        this._active = this._loader.getActiveItems();
         this._keyboard = new KeyboardController(this, this._loader.getPlatformProxy());
         this._gameState = GAME_GOING;
         window.requestAnimationFrame(this.gameLoop.bind(this));
@@ -67,4 +68,4 @@ class Game {
 
 }
 
-var g = new Game();
+let g = new Game();

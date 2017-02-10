@@ -9,7 +9,7 @@ export default class Platform extends Item {
     constructor(width, height) {
         let x = (Settings.SCREEN_WIDTH / 2) - (width / 2);
         let y = Settings.SCREEN_HEIGHT - height - 15;
-        super('rectangle', 'white', [x, y], [width, height], [2, 0]);
+        super('rectangle', 'white', [x, y], [width, height], [1, 2]);
         this._ball = null;
     }
 
