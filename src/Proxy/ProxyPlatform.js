@@ -1,10 +1,10 @@
 /* @flow */
-import MovementProxy from './MovementProxy';
+import Proxy from './Proxy';
 import ProxyBall from './ProxyBall';
 import Platform from '../Entity/Platform';
 import CollisionManager from '../Collision/CollisionManager';
 
-export default class ProxyPlatform extends MovementProxy {
+export default class ProxyPlatform extends Proxy {
 
     _proxyBall: ProxyBall;
     _platform: Platform;
@@ -23,7 +23,6 @@ export default class ProxyPlatform extends MovementProxy {
         let position = this._object.getNextPosition();
         let collision = this._detector.collision(position);
         if(collision !== false) {
-            console.log(collision);
             return;
         }
 
@@ -35,10 +34,7 @@ export default class ProxyPlatform extends MovementProxy {
     }
 
     unbindBall() {
-        if(this._platform.ballBound()) {
-            console.log('unbinding');
-            this._platform.releaseBall();
-        }
+        this._platform.releaseBall();
     }
 
     setDirections(horizontal: string, vertical: string) {
@@ -47,5 +43,4 @@ export default class ProxyPlatform extends MovementProxy {
             this._proxyBall.setDirections(horizontal, vertical);
         }
     }
-
 }

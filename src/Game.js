@@ -9,7 +9,6 @@ import KeyboardController from './Controller/Keyboard';
 const GAME_GOING = 'going';
 const GAME_PAUSED = 'paused';
 
-
 class Game {
 
     _loader: ResourceLoader;
@@ -66,6 +65,13 @@ class Game {
         window.requestAnimationFrame(this.gameLoop.bind(this));
     }
 
+    togglePause() {
+        this._gameState = (this._gameState === GAME_PAUSED) ? GAME_GOING : GAME_PAUSED;
+    }
+
+    paused() {
+        return this._gameState === GAME_PAUSED;
+    }
 }
 
-let g = new Game();
+new Game();

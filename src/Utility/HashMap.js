@@ -35,7 +35,7 @@ export default class HashMap {
     _validateCellSize(): boolean {
 
         if(!Number.isInteger(this._rows) || !Number.isInteger(this._cols)) {
-            throw new RangeError('Hashmap cell size is invalid for current gamefield size.');
+            throw new RangeError('Hash map cell size is invalid for current game field size.');
         }
         return true;
     }
@@ -55,15 +55,14 @@ export default class HashMap {
     /**
      * _hashItem - description
      *
-     * @todo Think about using methods like getHitBoxStart() and getHitBoxEnd()
-     * for getting collision box boundries
+     * @todo Think about using methods like getHitBoxStart() and getHitBoxEnd() for getting collision box boundaries
      *
      * @param  {type} item description
      * @return {type}      description
      */
     _hashItem(item: typeof Item) {
-        var start = this.hash(item.x, item.y);
-        var end = this.hash(item.x + item.width, item.y + item.height);
+        let start = this.hash(item.x, item.y);
+        let end = this.hash(item.x + item.width, item.y + item.height);
 
         return { "start": start, "end": end};
     }
@@ -77,8 +76,8 @@ export default class HashMap {
     _getBucketIds(item: Item) {
         let hash = this._hashItem(item);
         let buckets = [];
-        for(var y = hash["start"]["y"]; y < hash["end"]["y"] + 1; y++) {
-            for(var x = hash["start"]["x"]; x < hash["end"]["x"] + 1; x++) {
+        for(let y = hash["start"]["y"]; y < hash["end"]["y"] + 1; y++) {
+            for(let x = hash["start"]["x"]; x < hash["end"]["x"] + 1; x++) {
                 buckets.push({"x": x, "y": y});
             }
         }
@@ -87,7 +86,7 @@ export default class HashMap {
 
     /**
      * Optimization step, so we don't have to run a cleaning loop every update.
-     * As a downside to this optimization, we can't dynamicly recreate hash map if,
+     * As a downside to this optimization, we can't dynamically recreate hash map if,
      * for example, screen height or width changes.
      *
      * @todo Run a few tests to see if returning empty array is going to break anything
@@ -117,9 +116,8 @@ export default class HashMap {
      * @return {type}      description
      */
     addItem(item: Item) {
-        var buckets = this._getBucketIds(item);
+        let buckets = this._getBucketIds(item);
         for(let bucket of buckets) {
-            //console.log("Y: %f, X: %f", bucket.y, bucket.x);
             this._buckets[bucket.y][bucket.x].push(item);
         }
     }
@@ -131,8 +129,8 @@ export default class HashMap {
      * @return {type}            description
      */
     getNearbyItems(item: Item) {
-        var buckets = this._getBucketIds(item);
-        var nearby = [];
+        let buckets = this._getBucketIds(item);
+        let nearby = [];
         for(let bucket of buckets) {
             for(let storedItem of this._buckets[bucket.y][bucket.x]) {
                 if(item !== storedItem && nearby.indexOf(storedItem) === -1) {

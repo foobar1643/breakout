@@ -10,30 +10,20 @@ export default class CollisionManager {
     }
 
     _collides(position, item) {
-
-        if( (position.x >= item.x - this._object.width && position.x <= item.x + item.width) &&
-            (position.y >= item.y && position.y <= item.y + item.height)) {
-                return true;
-        }
-
-        return false;
+        return ( (position.x >= item.x - this._object.width && position.x <= item.x + item.width) &&
+        (position.y >= item.y && position.y <= item.y + item.height) );
     }
 
     _collidesV(position, item) {
-
-        if( (position.y >= item.y - this._object.height && position.y <= item.y + item.height + this._object.height) &&
-            (position.x >= item.x && position.x <= item.x + item.width)) {
-                return true;
-        }
-
-        return false;
+        return ( (position.y >= item.y - this._object.height && position.y <= item.y + item.height + this._object.height) &&
+        (position.x >= item.x && position.x <= item.x + item.width) );
     }
 
     collision(position) {
         let nearby = this._hashMap.getNearbyItems(this._object);
 
         for(let item of nearby) {
-            switch(true) {
+            switch(true) { // TODO: Think about refactoring this into something more readable
                 case this._collidesV(position, item):
                     return 'vertical';
                 case this._collides(position, item):
@@ -42,5 +32,4 @@ export default class CollisionManager {
         }
         return false;
     }
-
 }

@@ -1,7 +1,7 @@
 /* @flow */
 import Item from '../Entity/Item';
 
-export default class MovementProxy {
+export default class Proxy {
 
     _object: Item;
 
@@ -18,5 +18,4 @@ export default class MovementProxy {
         this._object.hDirection = horizontal;
         this._object.vDirection = vertical;
     }
-
 }

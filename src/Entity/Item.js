@@ -10,16 +10,16 @@ export default class Item {
     _color: string;
     _position: [number, number]; // [x, y]
     _size: [number, number]; // [width, height]
-    _speed: [number, number] // [horizontal, vertical]
-    _direction: [string, string]
+    _speed: [number, number]; // [horizontal, vertical]
+    _direction: [string, string];
     _stroke: boolean;
 
     get color() { return this._color; };
     get type() { return this._type; };
 
-    get x() { return this._position[0]; };
+    get x(): number { return this._position[0]; };
     set x(x: number) { this._position[0] = x; };
-    get y() { return this._position[1]; };
+    get y(): number { return this._position[1]; };
     set y(y: number) { this._position[1] = y; };
 
     get width() { return this._size[0]; };
@@ -68,5 +68,4 @@ export default class Item {
         let yMathOperation = this.movingMathOperation(this.vDirection);
         return { "x": xMathOperation(this.x, this.hSpeed), "y": yMathOperation(this.y, this.vSpeed) };
     }
-
 }

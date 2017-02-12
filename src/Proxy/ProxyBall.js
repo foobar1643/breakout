@@ -1,10 +1,10 @@
 /* @flow */
-import MovementProxy from './MovementProxy';
+import Proxy from './Proxy';
 import Ball from '../Entity/Ball';
 import BallCollisionManager from '../Collision/BallCollisionManager';
 import {STATE_FREE} from '../Entity/Ball';
 
-export default class ProxyBall extends MovementProxy {
+export default class ProxyBall extends Proxy {
 
     _ball: Ball;
     _hashMap: any;
@@ -28,7 +28,6 @@ export default class ProxyBall extends MovementProxy {
             let position = this._ball.getNextPosition();
             let collision = this._detector.collision(position);
             if(collision !== false) {
-                console.log(collision);
                 switch(collision) {
                     case 'vertical':
                         return this._ball.flipVerticalDirection();
@@ -41,9 +40,4 @@ export default class ProxyBall extends MovementProxy {
             super.move(position);
         }
     }
-
-    setFreeState() {
-        this._ball.unbind();
-    }
-
 }

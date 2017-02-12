@@ -55,5 +55,4 @@ export default class Ball extends Item {
         this.vDirection = (this.vDirection == DIRECTION_UP) ?
             DIRECTION_DOWN : DIRECTION_UP;
     }
-
 }

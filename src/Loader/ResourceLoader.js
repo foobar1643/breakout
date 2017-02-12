@@ -111,5 +111,4 @@ export default class ResourceLoader {
         this._platformProxy = new ProxyPlatform(this._items[0], ballProxy, this._hashMap);
         return this._platformProxy;
     }
-
 }

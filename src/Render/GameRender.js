@@ -46,13 +46,13 @@ export default class GameRender extends Render {
     _hashMapGrid() {
         if(Settings.DRAW_HASHMAP === true) {
             let x = 0, y = 0;
-            // Think about optimizing this (can be done in one loop)
-            for(var i = 0; i < Math.floor(this._canvas.height / CELL_SIZE) + 1; i++) { // Rows
+            // TODO Think about optimizing this (can be done in one loop)
+            for(let i = 0; i < Math.floor(this._canvas.height / CELL_SIZE) + 1; i++) { // Rows
                 super._line(HASHMAP_LINE_SIZE, HASHMAP_LINE_STYLE, [0, y], [this._canvas.width, y]);
                 y = y + CELL_SIZE;
             }
 
-            for(var i = 0; i < Math.floor(this._canvas.width / CELL_SIZE) + 1; i++) { // Cols
+            for(let i = 0; i < Math.floor(this._canvas.width / CELL_SIZE) + 1; i++) { // Cols
                 super._line(HASHMAP_LINE_SIZE, HASHMAP_LINE_STYLE, [x, 0], [x, this._canvas.width]);
                 x = x + CELL_SIZE;
             }
@@ -72,5 +72,4 @@ export default class GameRender extends Render {
             renderFunction(item, this._context); // Find an ES6 way to bind a context
         }
     }
-
 }
