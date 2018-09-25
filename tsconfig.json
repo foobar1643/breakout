@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "module": "es6",
+    "lib": ["es5", "es6", "dom"],
+    "types": ["reflect-metadata"],
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es5"
+  }
+}

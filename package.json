@@ -1,36 +1,36 @@
 {
-  "name": "arkanoid",
-  "version": "0.0.5",
-  "description": "Simple breakout-style game",
-  "main": "gulpfile.js",
+  "name": "breakout",
+  "version": "1.0.0",
+  "description": "Breakout clone written in TypeScript",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foobar1643/arkanoid.git"
+    "url": "git+https://github.com/foobar1643/breakout.git"
   },
+  "keywords": [
+    "typescript",
+    "game",
+    "breakout-style-game"
+  ],
   "author": "foobar1643",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/foobar1643/arkanoid/issues"
+    "url": "https://github.com/foobar1643/breakout/issues"
   },
-  "homepage": "https://github.com/foobar1643/arkanoid#readme",
+  "homepage": "https://github.com/foobar1643/breakout#readme",
   "devDependencies": {
-    "babel-plugin-transform-es2015-modules-amd": "^6.22.0",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-latest": "^6.22.0",
-    "del": "^2.2.2",
-    "gulp-babel": "^6.1.2",
-    "gulp-flowtype": "^1.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-requirejs": "^1.0.0-rc1",
-    "gulp-uglify": "^2.0.1",
-    "gulp-util": "^3.0.8"
+    "webpack": "^4.20.1",
+    "webpack-cli": "^3.1.1"
   },
-  "optionalDependencies": {
-    "eslint": "^3.14.1",
-    "babel-eslint": "^7.1.1",
-    "eslint-plugin-flowtype": "^2.30.0"
+  "dependencies": {
+    "emittery": "^0.4.1",
+    "inversify": "^4.13.0",
+    "reflect-metadata": "^0.1.12",
+    "ts-loader": "^5.2.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
   }
 }
