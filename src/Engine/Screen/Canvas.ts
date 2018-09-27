@@ -7,6 +7,7 @@ export default class Canvas implements IScreen {
 
     private readonly canvas: HTMLCanvasElement;
     private readonly context: CanvasRenderingContext2D;
+    private readonly color: IRGBMap;
     private shown: boolean;
 
     constructor(
@@ -14,6 +15,8 @@ export default class Canvas implements IScreen {
         @inject(TYPES.ScreenHeight) height: number,
         @inject(TYPES.ScreenColor) color: IRGBMap,
     ) {
+        this.shown = false;
+        this.color = color;
         this.canvas = document.createElement("canvas");
         this.canvas.width = width;
         this.canvas.height = height;
@@ -24,11 +27,7 @@ export default class Canvas implements IScreen {
             throw new Error("Failed to retrieve canvas rendering context.");
         }
 
-        this.shown = false;
         this.context = context;
-        this.context.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     public showScreen(parentElementId: string): void {
@@ -39,7 +38,14 @@ export default class Canvas implements IScreen {
         }
 
         parentElement.appendChild(this.canvas);
+        this.fillScreen();
         this.shown = true;
+    }
+
+    public fillScreen() {
+        this.context.fillStyle = `rgb(${this.color.red}, ${this.color.green}, ${this.color.blue})`;
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     public wasShown(): boolean {

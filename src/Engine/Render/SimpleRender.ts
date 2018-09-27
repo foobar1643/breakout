@@ -39,7 +39,6 @@ export default abstract class SimpleRender {
     }
 
     protected circle(item: Item): void {
-
         if (Shapes.CIRCLE !== item.shape) {
             throw new Error(`Cannot draw shape ${item.shape} as circle.`);
         }

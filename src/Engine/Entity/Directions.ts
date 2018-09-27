@@ -1,13 +1,11 @@
-export enum DirectionsNone {
-    NONE = 0,
-}
-
 export enum VerticalDirections {
+    NONE = 0,
     UP = 1,
     DOWN = 2,
 }
 
 export enum HorizontalDirections {
-    LEFT = 3,
-    RIGHT = 4,
+    NONE = 0,
+    LEFT = 1,
+    RIGHT = 2,
 }

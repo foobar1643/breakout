@@ -2,7 +2,7 @@ import ICoordinatesMap from "../Map/ICoordinatesMap";
 import IDirectionMap from "../Map/IDirectionMap";
 import ISizeMap from "../Map/ISizeMap";
 import ISpeedMap from "../Map/ISpeedMap";
-import {DirectionsNone, HorizontalDirections, VerticalDirections} from "./Directions";
+import {HorizontalDirections, VerticalDirections} from "./Directions";
 import {Shapes} from "./Shapes";
 
 export default abstract class Item {
@@ -75,7 +75,7 @@ export default abstract class Item {
     }
 
     protected getMotionCalculator(
-        direction: HorizontalDirections | VerticalDirections | DirectionsNone,
+        direction: HorizontalDirections | VerticalDirections,
     ): (axis: number, speed: number) => number {
         switch (direction) {
             case VerticalDirections.UP:
