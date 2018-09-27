@@ -1,13 +1,15 @@
+import {injectable} from "inversify";
 import Item from "../Entity/Item";
 import {Shapes} from "../Entity/Shapes";
 import ICoordinatesMap from "../Map/ICoordinatesMap";
 
-export default class SimpleRender {
+@injectable()
+export default abstract class SimpleRender {
 
-    private readonly screen: IScreen;
-    private readonly context: CanvasRenderingContext2D;
+    protected readonly screen: IScreen;
+    protected readonly context: CanvasRenderingContext2D;
 
-    constructor(screen: IScreen) {
+    protected constructor(screen: IScreen) {
         this.screen = screen;
         this.context = this.screen.getRenderContext();
     }
@@ -34,5 +36,21 @@ export default class SimpleRender {
 
         this.context.fillStyle = item.color;
         this.context.fillRect(item.x, item.y, item.width, item.height);
+    }
+
+    protected circle(item: Item): void {
+
+        if (Shapes.CIRCLE !== item.shape) {
+            throw new Error(`Cannot draw shape ${item.shape} as circle.`);
+        }
+
+        this.context.beginPath();
+        this.context.arc(item.x, item.y, item.radius, 0, 2 * Math.PI, false);
+        this.context.fillStyle = item.color;
+        this.context.fill();
+
+        this.context.strokeStyle = "black";
+        this.context.lineWidth = 1;
+        this.context.stroke();
     }
 }

@@ -2,10 +2,10 @@ import ICoordinatesMap from "../Map/ICoordinatesMap";
 import IDirectionMap from "../Map/IDirectionMap";
 import ISizeMap from "../Map/ISizeMap";
 import ISpeedMap from "../Map/ISpeedMap";
-import {Directions} from "./Directions";
+import {DirectionsNone, HorizontalDirections, VerticalDirections} from "./Directions";
 import {Shapes} from "./Shapes";
 
-export default class Item {
+export default abstract class Item {
 
     private readonly itemColor: string;
     private readonly itemShape: Shapes;
@@ -13,15 +13,17 @@ export default class Item {
     private size: ISizeMap;
     private speed: ISpeedMap;
     private direction: IDirectionMap;
+    private drawRadius: number;
     private readonly drawStroke: boolean;
 
-    constructor(
+    protected constructor(
         color: string,
         shape: Shapes,
         position: ICoordinatesMap,
         size: ISizeMap,
         speed: ISpeedMap,
         direction: IDirectionMap,
+        radius: number = 0,
         stroke: boolean = true,
     ) {
         this.itemColor = color;
@@ -30,6 +32,7 @@ export default class Item {
         this.size = size;
         this.speed = speed;
         this.direction = direction;
+        this.drawRadius = radius;
         this.drawStroke = stroke;
     }
 
@@ -56,6 +59,9 @@ export default class Item {
     get vDirection(): number { return this.direction.vertical; }
     set vDirection(direction: number) { this.direction.vertical = direction; }
 
+    get radius(): number { return this.drawRadius; }
+    set radius(radius: number) { this.drawRadius = radius; }
+
     get stroke(): boolean { return this.drawStroke; }
 
     public nextPosition(): ICoordinatesMap {
@@ -68,19 +74,21 @@ export default class Item {
         };
     }
 
-    protected getMotionCalculator(direction: Directions): (axis: number, speed: number) => number {
+    protected getMotionCalculator(
+        direction: HorizontalDirections | VerticalDirections | DirectionsNone,
+    ): (axis: number, speed: number) => number {
         switch (direction) {
-            case Directions.UP:
-            case Directions.LEFT:
+            case VerticalDirections.UP:
+            case HorizontalDirections.LEFT:
                 return (axis: number, speed: number): number => {
                     return axis - speed;
                 };
-            case Directions.DOWN:
-            case Directions.RIGHT:
+            case VerticalDirections.DOWN:
+            case HorizontalDirections.RIGHT:
                 return (axis: number, speed: number): number => {
                     return axis + speed;
                 };
-            case Directions.NONE:
+            default:
                 return (axis: number, speed: number): number => {
                     return axis;
                 };

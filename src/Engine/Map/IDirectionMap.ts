@@ -1,6 +1,6 @@
-import {Directions} from "../Entity/Directions";
+import {DirectionsNone, HorizontalDirections, VerticalDirections} from "../Entity/Directions";
 
 export default interface IDirectionMap {
-    horizontal: Directions;
-    vertical: Directions;
+    horizontal: HorizontalDirections | DirectionsNone;
+    vertical: VerticalDirections | DirectionsNone;
 }

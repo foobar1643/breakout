@@ -1,12 +1,19 @@
+import {inject, injectable} from "inversify";
+import {TYPES} from "../../types";
 import IRGBMap from "../Map/IRGBMap";
 
+@injectable()
 export default class Canvas implements IScreen {
 
     private readonly canvas: HTMLCanvasElement;
     private readonly context: CanvasRenderingContext2D;
     private shown: boolean;
 
-    constructor(width: number, height: number, color: IRGBMap) {
+    constructor(
+        @inject(TYPES.ScreenWidth) width: number,
+        @inject(TYPES.ScreenHeight) height: number,
+        @inject(TYPES.ScreenColor) color: IRGBMap,
+    ) {
         this.canvas = document.createElement("canvas");
         this.canvas.width = width;
         this.canvas.height = height;
