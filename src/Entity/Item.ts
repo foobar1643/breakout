@@ -2,8 +2,9 @@ import ICoordinatesMap from "../Map/ICoordinatesMap";
 import IDirectionMap from "../Map/IDirectionMap";
 import ISizeMap from "../Map/ISizeMap";
 import ISpeedMap from "../Map/ISpeedMap";
-import {HorizontalDirections, VerticalDirections} from "./Directions";
-import {Shapes} from "./Shapes";
+import {HorizontalDirections, VerticalDirections} from "./Enum/Directions";
+import {Shapes} from "./Enum/Shapes";
+import IHitBox from "../Map/IHitBox";
 
 export default abstract class Item {
 
@@ -71,6 +72,21 @@ export default abstract class Item {
         return {
             x: xCalculator(this.x, this.hSpeed),
             y: yCalculator(this.y, this.vSpeed),
+        };
+    }
+
+    public applyPosition(position: ICoordinatesMap): void {
+        this.x = position.x;
+        this.y = position.y;
+    }
+
+    public hitBox(): IHitBox {
+        return {
+            end: {
+                x: this.x + this.height,
+                y: this.y + this.width,
+            },
+            start: this.position,
         };
     }
 

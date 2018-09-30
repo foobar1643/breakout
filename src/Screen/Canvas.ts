@@ -1,10 +1,12 @@
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
 import IRGBMap from "../Map/IRGBMap";
+import {TYPES} from "../types";
 
 @injectable()
 export default class Canvas implements IScreen {
 
+    public readonly width: number;
+    public readonly height: number;
     private readonly canvas: HTMLCanvasElement;
     private readonly context: CanvasRenderingContext2D;
     private readonly color: IRGBMap;
@@ -15,11 +17,13 @@ export default class Canvas implements IScreen {
         @inject(TYPES.ScreenHeight) height: number,
         @inject(TYPES.ScreenColor) color: IRGBMap,
     ) {
+        this.width = width;
+        this.height = height;
         this.shown = false;
         this.color = color;
         this.canvas = document.createElement("canvas");
-        this.canvas.width = width;
-        this.canvas.height = height;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
 
         const context: CanvasRenderingContext2D | null = this.canvas.getContext("2d");
 
@@ -38,11 +42,10 @@ export default class Canvas implements IScreen {
         }
 
         parentElement.appendChild(this.canvas);
-        this.fillScreen();
         this.shown = true;
     }
 
-    public fillScreen() {
+    public resetScreen() {
         this.context.fillStyle = `rgb(${this.color.red}, ${this.color.green}, ${this.color.blue})`;
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);

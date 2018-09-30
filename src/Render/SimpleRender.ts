@@ -1,7 +1,8 @@
 import {injectable} from "inversify";
+import {Shapes} from "../Entity/Enum/Shapes";
 import Item from "../Entity/Item";
-import {Shapes} from "../Entity/Shapes";
 import ICoordinatesMap from "../Map/ICoordinatesMap";
+import ISizeMap from "../Map/ISizeMap";
 
 @injectable()
 export default abstract class SimpleRender {
@@ -12,6 +13,10 @@ export default abstract class SimpleRender {
     protected constructor(screen: IScreen) {
         this.screen = screen;
         this.context = this.screen.getRenderContext();
+    }
+
+    public resetScreen(): void {
+        this.screen.resetScreen();
     }
 
     protected line(size: number, style: string, start: ICoordinatesMap, end: ICoordinatesMap): void {

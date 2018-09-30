@@ -1,9 +1,15 @@
 export const TYPES = {
     Canvas: Symbol.for("Canvas"),
+    Emitter: Symbol.for("Emitter"),
     GameLoop: Symbol.for("GameLoop"),
+    Keyboard: Symbol.for("Keyboard"),
+    Loader: Symbol.for("Loader"),
+    Movement: Symbol.for("Movement"),
     Render: Symbol.for("BreakoutRender"),
     ScreenColor: Symbol.for("ScreenColor"),
     ScreenHeight: Symbol.for("ScreenHeight"),
     ScreenParent: Symbol.for("ScreenParent"),
     ScreenWidth: Symbol.for("ScreenWidth"),
+    SpatialCellSize: Symbol.for("SpatialCellSize"),
+    SpatialHashMap: Symbol.for("SpatialHashMap"),
 };

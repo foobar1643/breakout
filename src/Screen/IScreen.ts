@@ -1,5 +1,8 @@
 interface IScreen {
 
+    width: number;
+    height: number;
+
     /**
      * Adds IScreen element to user-visible space on the actual screen.
      *
@@ -16,4 +19,9 @@ interface IScreen {
      * Returns rendering context for current screen.
      */
     getRenderContext(): CanvasRenderingContext2D;
+
+    /**
+     * Resets current IScreen element to initial state.
+     */
+    resetScreen(): void;
 }

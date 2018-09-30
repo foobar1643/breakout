@@ -5,5 +5,4 @@ import {TYPES} from "./types";
 window.onload = () => {
     const gameLoop = container.get<GameLoop>(TYPES.GameLoop);
     gameLoop.start();
-    gameLoop.pause();
 };

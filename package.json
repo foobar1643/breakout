@@ -22,15 +22,17 @@
   },
   "homepage": "https://github.com/foobar1643/breakout#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-loader": "^5.2.0",
+    "tslint": "^5.11.0",
     "webpack": "^4.20.1",
     "webpack-cli": "^3.1.1"
   },
   "dependencies": {
-    "emittery": "^0.4.1",
+    "eventemitter3": "^3.1.0",
     "inversify": "^4.13.0",
     "reflect-metadata": "^0.1.12",
-    "ts-loader": "^5.2.0",
-    "tslint": "^5.11.0",
     "typescript": "^3.0.3"
   }
 }
