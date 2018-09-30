@@ -1,10 +1,10 @@
 import {inject, injectable} from "inversify";
 import Ball from "../Entity/Ball";
+import Boundary from "../Entity/Boundary";
 import Brick from "../Entity/Brick";
 import Platform from "../Entity/Platform";
 import {TYPES} from "../types";
 import GameLevel from "./GameLevel";
-import Boundary from "../Entity/Boundary";
 
 @injectable()
 export default class LevelLoader {

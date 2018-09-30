@@ -1,11 +1,10 @@
 import {injectable} from "inversify";
 import {inject} from "inversify";
+import SpatialHashMap from "../Collision/SpatialHashMap";
 import {Shapes} from "../Entity/Enum/Shapes";
 import Item from "../Entity/Item";
 import {TYPES} from "../types";
 import SimpleRender from "./SimpleRender";
-import SpatialHashMap from "../Collision/SpatialHashMap";
-import has = Reflect.has;
 
 @injectable()
 export default class BreakoutRender extends SimpleRender {

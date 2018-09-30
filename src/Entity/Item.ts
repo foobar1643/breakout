@@ -1,10 +1,10 @@
 import ICoordinatesMap from "../Map/ICoordinatesMap";
 import IDirectionMap from "../Map/IDirectionMap";
+import IHitBox from "../Map/IHitBox";
 import ISizeMap from "../Map/ISizeMap";
 import ISpeedMap from "../Map/ISpeedMap";
 import {HorizontalDirections, VerticalDirections} from "./Enum/Directions";
 import {Shapes} from "./Enum/Shapes";
-import IHitBox from "../Map/IHitBox";
 
 export default abstract class Item {
 
